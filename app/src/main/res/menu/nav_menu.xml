@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/foodListFragment"
+        android:icon="@drawable/ic_food_menu_option"
+        android:title="@string/to_food_list" />
+    <item
+        android:id="@+id/userActivityFragment"
+        android:icon="@drawable/ic_activity_menu_option"
+        android:title="@string/to_activity_screen" />
+    <item
+        android:id="@+id/userProfileFragment"
+        android:icon="@drawable/ic_profile_menu_option"
+        android:title="@string/to_user_profile" />
+</menu>

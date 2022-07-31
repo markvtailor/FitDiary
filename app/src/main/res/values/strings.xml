@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">FitDiary</string>
+    <string name="to_food_list">Food List</string>
+    <string name="to_activity_screen">Activity</string>
+    <string name="to_user_profile">Profile</string>
+    <string name="Ccal">Ккал: %s</string>
+    <string name="calendar">Calendar</string>
+</resources>

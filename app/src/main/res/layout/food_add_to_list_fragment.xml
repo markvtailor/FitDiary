@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.markvtls.fitdiary.data.FoodServingViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/app_default_bar"
+            app:title="Добавление..."
+            android:theme="?attr/actionBarTheme"
+            android:background="@color/design_default_color_primary"
+            android:minHeight="?attr/actionBarSize"
+            style="@style/Widget.Material3.ActionBar.Solid"
+            android:layout_width="match_parent"
+            app:titleTextColor="@color/white"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/food_name_input_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/app_default_bar"
+            android:hint="Название..."
+            style="@style/ThemeOverlay.Material3.TextInputEditText.FilledBox">
+
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/food_name_input"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="text"
+                android:maxLines="@integer/material_motion_duration_medium_1"
+                android:maxLength="21"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/food_amount_input_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/food_name_input_layout"
+            android:hint="Грамм..."
+            style="@style/ThemeOverlay.Material3.TextInputEditText.FilledBox">
+
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/food_amount_input"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="number"
+                android:maxLines="@integer/material_motion_duration_medium_1"
+                android:maxLength="4"
+               />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/submit_button"
+            android:text="Сохранить"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/food_amount_input_layout" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
