@@ -21,7 +21,7 @@ interface FoodNutritionApiService {
 
     @Headers("X-Api-Key: ${Constants.API_KEY}")
     @GET("nutrition")
-    suspend fun getNutritionInfo(@Query("query") foodName: String): List<FoodNutrition> //suspend
+     suspend fun getNutritionInfo(@Query("query") foodName: String): List<FoodNutrition> //suspend
 }
 
 object NutritionApi {

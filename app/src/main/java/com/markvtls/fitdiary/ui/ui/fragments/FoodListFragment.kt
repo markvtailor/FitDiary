@@ -24,7 +24,6 @@ import java.util.concurrent.TimeUnit
 
 class FoodListFragment: Fragment() {
 
-    private val navigationArgs: FoodListFragmentArgs by navArgs()
 
     private val viewModel: FoodServingViewModel by lazy {
         val activity = requireNotNull(this.activity) {
@@ -66,7 +65,8 @@ class FoodListFragment: Fragment() {
 
         refreshUi()
         binding.addFoodButton.setOnClickListener {
-            this.findNavController().navigate(FoodListFragmentDirections.actionFoodListFragmentToAddFoodFragment())
+            AddFoodDialogFragment().show(childFragmentManager, AddFoodDialogFragment.TAG)
+            //this.findNavController().navigate(FoodListFragmentDirections.actionFoodListFragmentToAddFoodFragment())
         }
 
         binding.foodListToolbar.setOnMenuItemClickListener {
@@ -77,7 +77,14 @@ class FoodListFragment: Fragment() {
                 } else -> false
             }
         }
-
+        viewModel.status.observe(viewLifecycleOwner) {
+            when (it.case) {
+                "SUCCESS" -> println("start")
+                "INVALID WORD" -> notifyAboutRequestResult(it.case)
+                "INVALID TOKEN" -> notifyAboutRequestResult(it.case)
+                "CONNECTION IS MISSING" -> notifyAboutRequestResult(it.case)
+            }
+        }
     }
 
 
@@ -122,15 +129,16 @@ class FoodListFragment: Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        println("Destroyed")
+        println(viewModel.status.value)
         _binding = null
     }
 
-    fun notifyAboutRequestResult(cause: String) {
+    private fun notifyAboutRequestResult(cause: String) {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.RESUMED) {
                 Snackbar.make(requireView(), "Ошибка при добавлении: $cause", Snackbar.LENGTH_LONG).show()
             }
         }
+        viewModel.notificationCheck()
     }
 }

@@ -16,7 +16,7 @@ import com.markvtls.fitdiary.data.FoodServingViewModel
 import com.markvtls.fitdiary.data.FoodServingViewModelFactory
 import java.util.*
 
-class DatePickerDialogFragment(): DialogFragment(), DatePickerDialog.OnDateSetListener {
+class DatePickerDialogFragment : DialogFragment(), DatePickerDialog.OnDateSetListener {
 
     private val viewModel: FoodServingViewModel by viewModels(ownerProducer = { requireParentFragment()})
 

@@ -27,7 +27,7 @@ interface FoodNameTranslationApiService {
         "Content-Type: application/json",
         "Authorization: Bearer ${Constants.YANDEX_API_KEY}")
     @POST("translate")
-    suspend fun translateName(@Body json: TranslationRequest): Response<TranslationResponse> //suspend
+    suspend fun translateName(@Body json: TranslationRequest): TranslationResponse //suspend
 }
 
 object TranslationApi {

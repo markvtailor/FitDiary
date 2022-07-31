@@ -10,9 +10,12 @@ import com.squareup.moshi.Moshi
 import com.squareup.moshi.ToJson
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
+import retrofit2.Callback
 import retrofit2.HttpException
+import retrofit2.awaitResponse
 import java.net.UnknownHostException
 import java.text.DecimalFormat
 import java.text.NumberFormat
@@ -22,7 +25,14 @@ import java.util.*
 
 class FoodServingViewModel(application: Application): ViewModel() {
 
-
+    enum class ExceptionCases(val case: String) {
+        SUCCESS("SUCCESS"),
+        INVALID_WORD("INVALID WORD"),
+        INVALID_TOKEN("INVALID TOKEN"),
+        MISSING_CONNECTION("CONNECTION IS MISSING")
+    }
+    private var _status = MutableLiveData(ExceptionCases.SUCCESS)
+    val status: LiveData<ExceptionCases> get() = _status
     private val foodServingRepository =
         FoodServingRepository(FoodServingDatabase.getDatabase(application))
     private var _currentDate = LocalDate.now().format(DateTimeFormatter.ofPattern("ddMMy"))
@@ -68,24 +78,25 @@ class FoodServingViewModel(application: Application): ViewModel() {
         val translate = TranslationRequest(texts = name)
         viewModelScope.launch {
             try {
-                val translation = TranslationApi.retrofitService.translateName(translate).body()?.translations?.first()?.text.toString()
-                NutritionApi.retrofitService.getNutritionInfo(translation).runCatching {
-                    _nutritionList = this
-                }.onSuccess {
-                    if (nutritionList.isNullOrEmpty()) throw  InvalidWordException("Invalid word")
-                }
+                val translation = TranslationApi.retrofitService.translateName(translate).translations.first().text
+                _nutritionList = NutritionApi.retrofitService.getNutritionInfo(translation)
+                if (nutritionList.isNullOrEmpty()) throw InvalidWordException("Invalid word")
                 foodServingRepository.insertFood(createFoodInstance(id))
             } catch (e: InvalidWordException) {
                 println(e.printStackTrace())
+                _status.value = ExceptionCases.INVALID_WORD
             } catch (e: UnknownHostException) {
                 println(e.printStackTrace())
+                _status.value = ExceptionCases.MISSING_CONNECTION
             } catch (e: Exception) {
                 println(e.printStackTrace())
+                _status.value = ExceptionCases.INVALID_TOKEN
             }
         }
     }
 
     private fun createFoodInstance(id: Int): FoodServing {
+        println(nutritionList)
         val food = FoodServing(id, currentFood, currentFoodAmount, 0.0, 0.0, 0.0, 0.0, currentDate)
         nutritionList?.forEach { it ->
             food.ccal += it.calories.toDouble()
@@ -124,6 +135,9 @@ class FoodServingViewModel(application: Application): ViewModel() {
         _chosenDate = rawDate.format(DateTimeFormatter.ofPattern("ddMMy"))
     }
 
+    fun notificationCheck() {
+        _status.value = ExceptionCases.SUCCESS
+    }
 
 
 

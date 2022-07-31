@@ -1,34 +1,31 @@
 package com.markvtls.fitdiary.ui.ui.fragments
 
+import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
+import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.navigation.navGraphViewModels
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.snackbar.Snackbar
 import com.markvtls.fitdiary.R
 import com.markvtls.fitdiary.data.FoodServingViewModel
 import com.markvtls.fitdiary.data.FoodServingViewModelFactory
-
 import com.markvtls.fitdiary.databinding.FoodAddToListFragmentBinding
-import com.markvtls.fitdiary.utils.InvalidWordException
 import kotlinx.coroutines.launch
-import java.net.UnknownHostException
 
+class AddFoodDialogFragment: DialogFragment() {
 
-class AddFoodFragment: Fragment() {
-    private val navigationArgs: AddFoodFragmentArgs by navArgs()
+    //private val navigationArgs: AddFoodFragmentArgs by navArgs()
 
-    private val viewModel: FoodServingViewModel by navGraphViewModels(R.id.nav_graph) {
-         FoodServingViewModelFactory(requireActivity().application)
-    }
+    private val viewModel: FoodServingViewModel by viewModels({requireParentFragment()})
+
 
     private var _binding: FoodAddToListFragmentBinding? = null
     private val binding get() = _binding!!
@@ -38,39 +35,36 @@ class AddFoodFragment: Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FoodAddToListFragmentBinding.inflate(layoutInflater)
+        _binding = FoodAddToListFragmentBinding.inflate(inflater,container,false)
+            .apply {
+                this.lifecycleOwner = this@AddFoodDialogFragment
+                this.viewModel = viewModel
+            }
+
         return binding.root
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val bottom = requireActivity().findViewById<BottomNavigationView>(R.id.bottom_navigation)
-        bottom.visibility = View.INVISIBLE
+        if (dialog != null) dialog!!.window!!.setLayout(1000, 675) ///fix
         binding.submitButton.setOnClickListener{
-            if (isInputValid())   addFoodToList()
+            if (isInputValid()) {
+                addFoodToList()
+                dialog?.dismiss()
+            }
+
         }
-
+        println(requireParentFragment())
+        super.onViewCreated(view, savedInstanceState)
     }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        val bottom = requireActivity().findViewById<BottomNavigationView>(R.id.bottom_navigation)
-
-        bottom.visibility = View.VISIBLE
-        _binding = null
-    }
-
     private fun addFoodToList() {
-        val id = navigationArgs.id
+        println(requireParentFragment())
+        val id = 0
         val name = binding.foodNameInput.text.toString()
         val amount = binding.foodAmountInput.text.toString()
-        viewModel.getNutrition(id, name, amount.toInt())
-        val action = AddFoodFragmentDirections.actionAddFoodFragmentToFoodListFragment(true)
-        findNavController().navigate(action)
-
-    }
-
-
+        lifecycleScope.launch {
+            viewModel.getNutrition(id, name, amount.toInt())
+        }
+        }
 
     private fun isInputValid(): Boolean {
         val nameInput = binding.foodNameInput
@@ -90,13 +84,14 @@ class AddFoodFragment: Fragment() {
             nameInput.error = "Введите слово!"
             conditions++
         }
-1
+
         if (!amountInput.text.toString().matches("[0-9]{1,4}".toRegex())) {
             amountInput.error = "Некорректное число!"
             conditions++
         }
         return conditions == 0
     }
-
-
+    companion object {
+        const val TAG = "Addition Dialog"
+    }
 }
