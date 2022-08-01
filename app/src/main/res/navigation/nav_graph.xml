@@ -8,12 +8,6 @@
         android:id="@+id/foodListFragment"
         android:name="com.markvtls.fitdiary.ui.ui.fragments.FoodListFragment"
         android:label="FoodListFragment" >
-        <action
-            android:id="@+id/action_foodListFragment_to_foodDetailsFragment"
-            app:destination="@id/foodDetailsFragment" />
-        <action
-            android:id="@+id/action_foodListFragment_to_addFoodFragment"
-            app:destination="@id/addFoodFragment" />
         <argument
             android:name="additionState"
             app:argType="boolean"
@@ -27,37 +21,6 @@
         android:id="@+id/userProfileFragment"
         android:name="com.markvtls.fitdiary.ui.ui.fragments.UserProfileFragment"
         android:label="UserProfileFragment" />
-    <fragment
-        android:id="@+id/foodDetailsFragment"
-        android:name="com.markvtls.fitdiary.ui.ui.fragments.FoodDetailsFragment"
-        android:label="FoodDetailsFragment" >
-        <argument
-            android:name="id"
-            app:argType="integer" />
-        <action
-            android:id="@+id/action_foodDetailsFragment_to_foodListFragment"
-            app:destination="@id/foodListFragment"
-            app:popUpTo="@id/foodListFragment"
-            app:popUpToInclusive="true" />
-        <action
-            android:id="@+id/action_foodDetailsFragment_to_addFoodFragment"
-            app:destination="@id/addFoodFragment"
-            app:popUpTo="@id/foodListFragment"
-            app:popUpToInclusive="true" />
-    </fragment>
-    <fragment
-        android:id="@+id/addFoodFragment"
-        android:name="com.markvtls.fitdiary.ui.ui.fragments.AddFoodFragment"
-        android:label="AddFoodFragment" >
-        <action
-            android:id="@+id/action_addFoodFragment_to_foodListFragment"
-            app:destination="@id/foodListFragment"
-            app:popUpToInclusive="false" />
-        <argument
-            android:name="id"
-            app:argType="integer"
-            android:defaultValue="0" />
-    </fragment>
     <fragment
         android:id="@+id/datePickerDialogFragment"
         android:name="com.markvtls.fitdiary.ui.ui.fragments.DatePickerDialogFragment"

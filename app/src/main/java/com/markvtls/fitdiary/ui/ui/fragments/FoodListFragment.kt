@@ -42,7 +42,10 @@ class FoodListFragment: Fragment() {
             val result = bundle.getString("bundleKey")
             if (result == "done") {
                 refreshUi()
-                 } }
+                 }else if (result!!.toInt() > 0) {
+                     addNewFood(result.toInt())
+            }
+                 }
 
 
             }
@@ -65,8 +68,7 @@ class FoodListFragment: Fragment() {
 
         refreshUi()
         binding.addFoodButton.setOnClickListener {
-            AddFoodDialogFragment().show(childFragmentManager, AddFoodDialogFragment.TAG)
-            //this.findNavController().navigate(FoodListFragmentDirections.actionFoodListFragmentToAddFoodFragment())
+            addNewFood(0)
         }
 
         binding.foodListToolbar.setOnMenuItemClickListener {
@@ -98,8 +100,7 @@ class FoodListFragment: Fragment() {
         val recyclerView = binding.foodList
         recyclerView.layoutManager = LinearLayoutManager(this.context)
         val foodListAdapter = FoodListAdapter {
-            val action = FoodListFragmentDirections.actionFoodListFragmentToFoodDetailsFragment(it.id)
-            this.findNavController().navigate(action)
+            showDetails(it.id)
         }
         recyclerView.adapter = foodListAdapter
         viewLifecycleOwner.lifecycleScope.launch {
@@ -131,6 +132,20 @@ class FoodListFragment: Fragment() {
         super.onDestroyView()
         println(viewModel.status.value)
         _binding = null
+    }
+    private fun addNewFood(id: Int) {
+        val dialogFragment = AddFoodDialogFragment()
+        val args = Bundle()
+        args.putInt("FoodId",id)
+        dialogFragment.arguments = args
+        dialogFragment.show(childFragmentManager, AddFoodDialogFragment.TAG)
+    }
+    private fun showDetails(id: Int) {
+        val dialogFragment = FoodDetailsDialogFragment()
+        val args = Bundle()
+        args.putInt("FoodId",id)
+        dialogFragment.arguments = args
+        dialogFragment.show(childFragmentManager, FoodDetailsDialogFragment.TAG)
     }
 
     private fun notifyAboutRequestResult(cause: String) {

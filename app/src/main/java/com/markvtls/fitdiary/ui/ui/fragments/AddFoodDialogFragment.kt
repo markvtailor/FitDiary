@@ -22,7 +22,6 @@ import kotlinx.coroutines.launch
 
 class AddFoodDialogFragment: DialogFragment() {
 
-    //private val navigationArgs: AddFoodFragmentArgs by navArgs()
 
     private val viewModel: FoodServingViewModel by viewModels({requireParentFragment()})
 
@@ -53,12 +52,13 @@ class AddFoodDialogFragment: DialogFragment() {
             }
 
         }
+        println(arguments?.get("FoodId"))
         println(requireParentFragment())
         super.onViewCreated(view, savedInstanceState)
     }
     private fun addFoodToList() {
-        println(requireParentFragment())
-        val id = 0
+
+        val id = arguments?.getInt("FoodId",0)!!
         val name = binding.foodNameInput.text.toString()
         val amount = binding.foodAmountInput.text.toString()
         lifecycleScope.launch {
