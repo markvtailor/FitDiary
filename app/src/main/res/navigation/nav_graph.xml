@@ -6,7 +6,7 @@
     app:startDestination="@id/foodListFragment">
     <fragment
         android:id="@+id/foodListFragment"
-        android:name="com.markvtls.fitdiary.ui.ui.fragments.FoodListFragment"
+        android:name="com.markvtls.fitdiary.presentation.food.fragments.FoodListFragment"
         android:label="FoodListFragment" >
         <argument
             android:name="additionState"
@@ -15,14 +15,14 @@
     </fragment>
     <fragment
         android:id="@+id/userActivityFragment"
-        android:name="com.markvtls.fitdiary.ui.ui.fragments.UserActivityFragment"
+        android:name="com.markvtls.fitdiary.presentation.activity.UserActivityFragment"
         android:label="UserActivityFragment" />
     <fragment
         android:id="@+id/userProfileFragment"
-        android:name="com.markvtls.fitdiary.ui.ui.fragments.UserProfileFragment"
+        android:name="com.markvtls.fitdiary.presentation.profile.UserProfileFragment"
         android:label="UserProfileFragment" />
     <fragment
         android:id="@+id/datePickerDialogFragment"
-        android:name="com.markvtls.fitdiary.ui.ui.fragments.DatePickerDialogFragment"
+        android:name="com.markvtls.fitdiary.presentation.food.fragments.DatePickerDialogFragment"
         android:label="DatePickerDialogFragment" />
 </navigation>
