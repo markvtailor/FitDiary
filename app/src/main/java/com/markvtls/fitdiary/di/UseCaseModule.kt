@@ -1,8 +1,12 @@
 package com.markvtls.fitdiary.di
 
-import com.markvtls.fitdiary.domain.repository.FoodServingRepository
-import com.markvtls.fitdiary.domain.use_cases.food_use_cases.DeleteFoodUseCase
-import com.markvtls.fitdiary.domain.use_cases.food_use_cases.*
+import com.markvtls.fitdiary.food.domain.repository.FoodServingRepository
+import com.markvtls.fitdiary.pedometer.domain.repository.StepActivityRepository
+import com.markvtls.fitdiary.pedometer.domain.use_cases.GetLastInsertionDateUseCase
+import com.markvtls.fitdiary.pedometer.domain.use_cases.GetStepsByDateUseCase
+import com.markvtls.fitdiary.pedometer.domain.use_cases.InsertDailyStepsUseCase
+import com.markvtls.fitdiary.food.domain.use_cases.DeleteFoodUseCase
+import com.markvtls.fitdiary.food.domain.use_cases.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -59,5 +63,23 @@ object UseCaseModule {
     @Provides
     fun provideGetCaloriesUseCase(repository: FoodServingRepository): GetCaloriesUseCase {
         return GetCaloriesUseCase(repository)
+    }
+
+    @Singleton
+    @Provides
+    fun provideGetStepsByDateUseCase(repository: StepActivityRepository): GetStepsByDateUseCase {
+        return GetStepsByDateUseCase(repository)
+    }
+
+    @Singleton
+    @Provides
+    fun provideInsertDailyStepsUseCase(repository: StepActivityRepository): InsertDailyStepsUseCase {
+        return InsertDailyStepsUseCase(repository)
+    }
+
+    @Singleton
+    @Provides
+    fun provideGetLastInsertionDateUseCase(repository: StepActivityRepository): GetLastInsertionDateUseCase {
+        return GetLastInsertionDateUseCase(repository)
     }
 }

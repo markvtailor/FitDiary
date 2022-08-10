@@ -1,8 +1,8 @@
 package com.markvtls.fitdiary.di
 
 import com.markvtls.fitdiary.utils.Constants
-import com.markvtls.fitdiary.data.network.FoodNameTranslationApiService
-import com.markvtls.fitdiary.data.network.FoodNutritionApiService
+import com.markvtls.fitdiary.food.data.source.network.FoodNameTranslationApiService
+import com.markvtls.fitdiary.food.data.source.network.FoodNutritionApiService
 import com.markvtls.fitdiary.utils.NutritionRetrofitClient
 import com.markvtls.fitdiary.utils.TranslationRetrofitClient
 import com.squareup.moshi.Moshi

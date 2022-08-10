@@ -4,9 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
     app:startDestination="@id/foodListFragment">
+    <action android:id="@+id/action_global_user_activity_fragment"
+        app:destination="@id/userActivityFragment"
+        app:launchSingleTop="true" />
     <fragment
         android:id="@+id/foodListFragment"
-        android:name="com.markvtls.fitdiary.presentation.food.fragments.FoodListFragment"
+        android:name="com.markvtls.fitdiary.food.presentation.fragments.FoodListFragment"
         android:label="FoodListFragment" >
         <argument
             android:name="additionState"
@@ -15,14 +18,14 @@
     </fragment>
     <fragment
         android:id="@+id/userActivityFragment"
-        android:name="com.markvtls.fitdiary.presentation.activity.UserActivityFragment"
+        android:name="com.markvtls.fitdiary.pedometer.presentation.fragments.UserActivityFragment"
         android:label="UserActivityFragment" />
     <fragment
         android:id="@+id/userProfileFragment"
-        android:name="com.markvtls.fitdiary.presentation.profile.UserProfileFragment"
+        android:name="com.markvtls.fitdiary.profile.presentation.fragments.UserProfileFragment"
         android:label="UserProfileFragment" />
     <fragment
         android:id="@+id/datePickerDialogFragment"
-        android:name="com.markvtls.fitdiary.presentation.food.fragments.DatePickerDialogFragment"
+        android:name="com.markvtls.fitdiary.food.presentation.fragments.DatePickerDialogFragment"
         android:label="DatePickerDialogFragment" />
 </navigation>
