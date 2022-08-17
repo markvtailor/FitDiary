@@ -9,6 +9,7 @@ import com.markvtls.fitdiary.food.data.dto.TranslationResponse
 import com.markvtls.fitdiary.food.domain.repository.FoodServingRepository
 import com.markvtls.fitdiary.food.data.source.network.FoodNameTranslationApiService
 import com.markvtls.fitdiary.food.data.source.network.FoodNutritionApiService
+import com.markvtls.fitdiary.food.domain.model.CaloriesForDay
 import com.markvtls.fitdiary.utils.NutritionRetrofitClient
 import com.markvtls.fitdiary.utils.TranslationRetrofitClient
 import kotlinx.coroutines.flow.Flow
@@ -47,6 +48,10 @@ class FoodServingRepositoryImpl @Inject constructor(
 
     override suspend fun getNutrition(name: String): List<FoodNutrition> { //done
         return NutritionApi.getNutritionInfo(name)
+    }
+
+    override fun getAllForCurrentWeek(dates: List<String>): Flow<List<CaloriesForDay>> {
+        return database.foodServingDao().getAllForCurrentWeek(dates)
     }
 
 

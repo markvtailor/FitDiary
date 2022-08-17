@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/foodListFragment">
+    app:startDestination="@id/userProfileFragment">
     <action android:id="@+id/action_global_user_activity_fragment"
         app:destination="@id/userActivityFragment"
         app:launchSingleTop="true" />
@@ -23,9 +23,43 @@
     <fragment
         android:id="@+id/userProfileFragment"
         android:name="com.markvtls.fitdiary.profile.presentation.fragments.UserProfileFragment"
-        android:label="UserProfileFragment" />
+        android:label="UserProfileFragment" >
+        <action
+            android:id="@+id/action_userProfileFragment_to_userProfileSettingsFragment"
+            app:destination="@id/userProfileSettingsFragment" />
+        <action
+            android:id="@+id/action_userProfileFragment_to_userProfilePreferencesFragment"
+            app:destination="@id/userProfilePreferencesFragment" />
+        <action
+            android:id="@+id/action_userProfileFragment_to_userProfileOverviewFragment"
+            app:destination="@id/userProfileOverviewFragment" />
+    </fragment>
     <fragment
         android:id="@+id/datePickerDialogFragment"
         android:name="com.markvtls.fitdiary.food.presentation.fragments.DatePickerDialogFragment"
         android:label="DatePickerDialogFragment" />
+    <fragment
+        android:id="@+id/userProfileSettingsFragment"
+        android:name="com.markvtls.fitdiary.profile.presentation.fragments.UserProfileSettingsFragment"
+        android:label="UserProfileSettingsFragment" >
+        <action
+            android:id="@+id/action_userProfileSettingsFragment_to_userProfileFragment"
+            app:destination="@id/userProfileFragment"
+            app:popUpTo="@id/userProfileFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/userProfilePreferencesFragment"
+        android:name="com.markvtls.fitdiary.profile.presentation.fragments.UserProfilePreferencesFragment"
+        android:label="UserProfilePreferencesFragment" >
+        <action
+            android:id="@+id/action_userProfilePreferencesFragment_to_userProfileFragment"
+            app:destination="@id/userProfileFragment"
+            app:popUpTo="@id/userProfileFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/userProfileOverviewFragment"
+        android:name="com.markvtls.fitdiary.profile.presentation.fragments.UserProfileOverviewFragment"
+        android:label="UserProfileOverviewFragment" />
 </navigation>

@@ -11,6 +11,9 @@ import com.markvtls.fitdiary.food.data.source.network.FoodNameTranslationApiServ
 import com.markvtls.fitdiary.food.data.source.network.FoodNutritionApiService
 import com.markvtls.fitdiary.pedometer.data.repository.StepActivityRepositoryImpl
 import com.markvtls.fitdiary.pedometer.domain.repository.StepActivityRepository
+import com.markvtls.fitdiary.profile.data.SettingsDataStore
+import com.markvtls.fitdiary.profile.data.repository.UserProfileRepositoryImpl
+import com.markvtls.fitdiary.profile.domain.repository.UserProfileRepository
 import com.markvtls.fitdiary.utils.NutritionRetrofitClient
 import com.markvtls.fitdiary.utils.TranslationRetrofitClient
 import dagger.Module
@@ -56,5 +59,17 @@ object DataModule {
     @Singleton
     fun provideStepActivityRepository(@ApplicationContext context: Context, database: StepActivityDatabase): StepActivityRepository {
         return StepActivityRepositoryImpl(context, database)
+    }
+
+    @Provides
+    @Singleton
+    fun provideSettingStore(@ApplicationContext context: Context): SettingsDataStore {
+        return SettingsDataStore(context)
+    }
+
+    @Provides
+    @Singleton
+    fun provideUserProfileRepository(settingsDataStore: SettingsDataStore): UserProfileRepository {
+        return UserProfileRepositoryImpl(settingsDataStore)
     }
 }

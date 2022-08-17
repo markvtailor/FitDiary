@@ -13,7 +13,7 @@ android {
 
     defaultConfig {
         applicationId "com.markvtls.fitdiary"
-        minSdk 21
+        minSdk 22
         targetSdk 32
         versionCode 1
         versionName "1.0"
@@ -44,6 +44,13 @@ var room_version = "2.4.3"
 var nav_version = "2.5.1"
 
 dependencies {
+
+    //Progress bar
+    implementation 'com.github.owl-93.Determinate-Progress-View:release:v1.4.4'
+
+    //DataStore
+    implementation "androidx.datastore:datastore-preferences:1.0.0"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.5.1"
     
     //AndroidChart
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'

@@ -2,17 +2,18 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+
     <data>
 
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/user_profile_fragment">
+        android:layout_height="match_parent">
+
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/app_default_bar"
-            app:title="Профиль"
+            app:title="Настройки"
             android:theme="?attr/actionBarTheme"
             android:background="@color/design_default_color_primary"
             android:minHeight="?attr/actionBarSize"
@@ -21,26 +22,27 @@
             app:titleTextColor="@color/white"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"/>
-        <Button
-            android:id="@+id/to_settings"
-            android:text="Настройки"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
+        <TextView
+            android:id="@+id/pedometerSetting"
+            android:text="Включить шагомер"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="32sp"
+            app:layout_constraintTop_toBottomOf="@id/app_default_bar"
+            app:layout_constraintStart_toStartOf="parent"/>
+        <ToggleButton
+            android:id="@+id/pedometerToggle"
+            android:layout_width="80dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="4dp"
+            app:layout_constraintStart_toEndOf="@id/pedometerSetting"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/app_default_bar" />
-
         <Button
-            android:id="@+id/to_preferences"
-            android:text="Цели"
+            android:text="Сохранить"
+            android:id="@+id/save"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
-            app:layout_constraintTop_toBottomOf="@id/to_settings" />
-
-        <Button
-            android:id="@+id/to_overview"
-            android:text="Отчёт за неделю"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            app:layout_constraintTop_toBottomOf="@id/to_preferences" />
-
+            android:layout_height="40dp"
+            app:layout_constraintBottom_toBottomOf="parent"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

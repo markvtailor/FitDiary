@@ -9,6 +9,8 @@ interface StepActivityRepository {
 
     fun getLastInsertionDate(): String
 
+    fun getAll(): Flow<List<StepActivity>>
+
     fun getAllForCurrentWeek(): Flow<List<StepActivity>>
 
     suspend fun update(stepActivity: StepActivity)

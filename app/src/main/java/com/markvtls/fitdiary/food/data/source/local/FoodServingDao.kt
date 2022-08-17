@@ -1,6 +1,7 @@
 package com.markvtls.fitdiary.food.data.source.local
 
 import androidx.room.*
+import com.markvtls.fitdiary.food.domain.model.CaloriesForDay
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -17,6 +18,10 @@ interface FoodServingDao {
 
     @Query("SELECT SUM(calories) from foodserving WHERE date =:date ")
     fun getTotalCcalByDate(date: String): Flow<Int>
+
+    @Query("SELECT SUM(calories) as ccal, date from foodserving WHERE date IN (:dates) GROUP BY date")
+    fun getAllForCurrentWeek(dates: List<String>): Flow<List<CaloriesForDay>>
+
     @Update
     suspend fun update(foodServing: FoodServing)
 

@@ -18,8 +18,7 @@ class FoodListFragment: Fragment() {
 
 
     private val viewModel: FoodServingViewModel by viewModels()
-
-
+    private var ccalPreference = 2100
     private var _binding: FoodListFragmentBinding? = null
     private val binding get() = _binding!!
 
@@ -41,18 +40,23 @@ class FoodListFragment: Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         _binding = FoodListFragmentBinding.inflate(layoutInflater)
-        val view = binding.root
 
-        return view
+        return binding.root
 
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.RESUMED) {
+                viewModel.preferences.collect {
+                    ccalPreference = it.ccalGoal
+                }
+            }
+        }
         refreshUi()
         binding.addFoodButton.setOnClickListener {
             addNewFood(0)
@@ -61,7 +65,7 @@ class FoodListFragment: Fragment() {
         binding.foodListToolbar.setOnMenuItemClickListener {
             when(it.itemId) {
                 R.id.calendar -> {
-                    showDatePickerDialog(view)
+                    showDatePickerDialog()
                     true
                 } else -> false
             }
@@ -74,10 +78,12 @@ class FoodListFragment: Fragment() {
                 "CONNECTION IS MISSING" -> notifyAboutRequestResult(it.case)
             }
         }
+
+
     }
 
 
-    private fun showDatePickerDialog(view: View) {
+    private fun showDatePickerDialog() {
         val newFragment = DatePickerDialogFragment()
         newFragment.show(childFragmentManager, "DatePicker")
 
@@ -94,6 +100,7 @@ class FoodListFragment: Fragment() {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.RESUMED) {
                 viewModel.foodList.collect {
                     foodListAdapter.submitList(it)
+
                 }
             }
         }
@@ -103,11 +110,12 @@ class FoodListFragment: Fragment() {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.RESUMED) {
                 try {
 
-                    viewModel.getCcalSum(date).collect() {
+                    viewModel.getCcalSum(date).collect {
+                        if (it > ccalPreference) binding.foodCcalLabel.setTextColor(resources.getColor(R.color.red)) else binding.foodCcalLabel.setTextColor(resources.getColor(R.color.black))
                         binding.foodCcalLabel.text = getString(R.string.Ccal, it)
                     }
                 }catch (e: Exception) {
-                    binding.foodCcalLabel.text = getString(R.string.Ccal, 0)
+                    binding.foodCcalLabel.text = "Ккал: 0"
                 }
             }
         }

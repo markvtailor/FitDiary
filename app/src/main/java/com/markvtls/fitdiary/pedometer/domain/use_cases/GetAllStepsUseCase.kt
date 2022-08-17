@@ -6,11 +6,11 @@ import com.markvtls.fitdiary.pedometer.domain.repository.StepActivityRepository
 import kotlinx.coroutines.flow.*
 import javax.inject.Inject
 
-class GetStepsForCurrentWeekUseCase @Inject constructor(
+class GetAllStepsUseCase @Inject constructor(
     private val repository: StepActivityRepository
 ) {
     operator fun invoke(): Flow<List<StepActivityDomain>> = flow {
-        val data = repository.getAllForCurrentWeek()
+        val data = repository.getAll()
         val steps = mutableListOf<StepActivityDomain>()
         data.collect { list ->
             list.forEach {

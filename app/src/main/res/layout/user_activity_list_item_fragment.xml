@@ -13,21 +13,38 @@
         <TextView
             android:id="@+id/date"
             android:textSize="40sp"
+            android:textAlignment="center"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
-        <TextView
-            android:id="@+id/steps"
-            android:textSize="40sp"
-            app:layout_constraintTop_toBottomOf="@id/date"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+
         <TextView
             android:id="@+id/calories"
             android:textSize="40sp"
-            app:layout_constraintTop_toBottomOf="@id/steps"
+            android:textAlignment="center"
+            app:layout_constraintTop_toBottomOf="@id/date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
+
+        <com.owl93.dpb.CircularProgressView
+            android:id="@+id/pedometer_progress_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            app:layout_constraintTop_toBottomOf="@id/calories"
+            app:startingAngle="0"
+            app:trackColor="@color/black"
+            app:strokeColor="@color/blue"
+            app:strokeGradientSize="stroke_only"
+            app:strokeGradientStyle="radial"
+            app:strokeWidth="12dp"
+            app:textFormat="integer"
+            app:textEnabled="true"
+            app:textColor="@color/material_dynamic_primary0"
+            app:textGradientSize="text_only"
+            app:textSize="40sp"
+            app:progress="0"
+            app:text="0"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

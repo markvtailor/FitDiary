@@ -8,17 +8,18 @@ import androidx.recyclerview.widget.RecyclerView
 import com.markvtls.fitdiary.databinding.UserActivityListItemFragmentBinding
 import com.markvtls.fitdiary.pedometer.domain.model.StepActivityDomain
 
-class UserActivityListAdapter: ListAdapter<StepActivityDomain, UserActivityListAdapter.UserActivityViewHolder>(
+class UserActivityListAdapter(private val stepsGoal: Int): ListAdapter<StepActivityDomain, UserActivityListAdapter.UserActivityViewHolder>(
     DiffCallback
 ) {
 
 
-    class UserActivityViewHolder(private var binding: UserActivityListItemFragmentBinding): RecyclerView.ViewHolder(binding.root) {
+    class UserActivityViewHolder(private var binding: UserActivityListItemFragmentBinding, private val stepsGoal: Int): RecyclerView.ViewHolder(binding.root) {
         fun bind(stepActivityDomain: StepActivityDomain) {
             binding.apply {
                 date.text = stepActivityDomain.date
-                steps.text = stepActivityDomain.steps.toString()
                 calories.text = stepActivityDomain.calories.toString()
+                pedometerProgressBar.text = stepActivityDomain.steps.toString()
+                pedometerProgressBar.progress = (stepActivityDomain.steps / (stepsGoal / 100)).toFloat()
             }
         }
     }
@@ -44,7 +45,8 @@ class UserActivityListAdapter: ListAdapter<StepActivityDomain, UserActivityListA
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserActivityViewHolder {
         return UserActivityViewHolder(
-            UserActivityListItemFragmentBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            UserActivityListItemFragmentBinding.inflate(LayoutInflater.from(parent.context), parent, false),
+            stepsGoal
         )
     }
 

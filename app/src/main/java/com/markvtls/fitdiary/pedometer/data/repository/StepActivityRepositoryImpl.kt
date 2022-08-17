@@ -23,6 +23,10 @@ class StepActivityRepositoryImpl@Inject constructor(
        return database.stepActivityDao().getLastInsertionDate()
     }
 
+    override fun getAll(): Flow<List<StepActivity>> {
+        return database.stepActivityDao().getAll()
+    }
+
     override fun getAllForCurrentWeek(): Flow<List<StepActivity>> {
         return database.stepActivityDao().getAllForCurrentWeek()
     }
