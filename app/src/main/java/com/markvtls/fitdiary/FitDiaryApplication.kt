@@ -5,15 +5,12 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
 import android.os.Build
-import androidx.hilt.work.HiltWorkerFactory
 import com.markvtls.fitdiary.food.data.source.local.FoodServingDatabase
 import dagger.hilt.android.HiltAndroidApp
-import javax.inject.Inject
 
 @HiltAndroidApp
-class FoodApplication: Application(), androidx.work.Configuration.Provider {
+class FitDiaryApplication : Application() {
 
-    @Inject lateinit var workerFactory: HiltWorkerFactory
     val database: FoodServingDatabase by lazy { FoodServingDatabase.getDatabase(this) }
     override fun onCreate() {
         super.onCreate()
@@ -24,7 +21,7 @@ class FoodApplication: Application(), androidx.work.Configuration.Provider {
             val channel = NotificationChannel(CHANNEL_ID, name, importance).apply {
                 description = descriptionText
             }
-            // Register the channel with the system
+
             val notificationManager: NotificationManager =
                 getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
             notificationManager.createNotificationChannel(channel)
@@ -35,6 +32,4 @@ class FoodApplication: Application(), androidx.work.Configuration.Provider {
         const val CHANNEL_ID = "activity_id"
     }
 
-    override fun getWorkManagerConfiguration() =
-        androidx.work.Configuration.Builder().setWorkerFactory(workerFactory).build()
 }

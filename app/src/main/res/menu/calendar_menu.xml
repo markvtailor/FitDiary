@@ -5,5 +5,5 @@
         android:id="@+id/calendar"
         android:icon="@drawable/ic_calendar"
         android:title="@string/calendar"
-        app:showAsAction="always"/>
+        app:showAsAction="always" />
 </menu>

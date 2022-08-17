@@ -4,7 +4,7 @@ import androidx.room.*
 import kotlinx.coroutines.flow.Flow
 
 @Dao
-interface StepActivityDao {
+interface PedometerDao {
 
     @Query("SELECT max(date) from stepactivity")
     fun getLastInsertionDate(): String

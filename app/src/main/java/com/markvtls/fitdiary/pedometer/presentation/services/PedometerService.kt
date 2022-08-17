@@ -35,26 +35,30 @@ import javax.inject.Inject
 
 
 @AndroidEntryPoint
-class StepActivityService : LifecycleService(), SensorEventListener {
+class PedometerService : LifecycleService(), SensorEventListener {
 
     @Inject
     lateinit var getStepsByDateUseCase: GetStepsByDateUseCase
+
     @Inject
     lateinit var insertDailyStepsUseCase: InsertDailyStepsUseCase
+
     @Inject
     lateinit var lastInsertionDateUseCase: GetLastInsertionDateUseCase
+
     @Inject
     lateinit var notificationBuilder: NotificationCompat.Builder
-    lateinit var currentNotificationBuilder: NotificationCompat.Builder
+    private lateinit var currentNotificationBuilder: NotificationCompat.Builder
 
     private var currentDate = LocalDate.now().format(DateTimeFormatter.ofPattern("yMMdd"))
     private var currentSteps: Int = 0
-    var isFirstRun = true
+    private var isFirstRun = true
     private var sensorManager: SensorManager? = null
 
     companion object {
         val counter = MutableLiveData(0)
     }
+
     private fun getInitialValue() {
         CoroutineScope(Dispatchers.IO).launch {
             try {
@@ -88,27 +92,33 @@ class StepActivityService : LifecycleService(), SensorEventListener {
         val stepSensor = sensorManager?.getDefaultSensor(Sensor.TYPE_STEP_COUNTER)
 
         if (stepSensor == null) {
-            Toast.makeText(this,"На устройстве отсутствует сенсор шагов",Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "На устройстве отсутствует сенсор шагов", Toast.LENGTH_SHORT)
+                .show()
         } else {
-            sensorManager?.registerListener(this,stepSensor,SensorManager.SENSOR_DELAY_NORMAL) //sensor data acquisition rate
+            sensorManager?.registerListener(
+                this,
+                stepSensor,
+                SensorManager.SENSOR_DELAY_NORMAL
+            ) //sensor data acquisition rate
         }
     }
+
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         intent?.let {
-            when(it.action) {
+            when (it.action) {
                 ACTION_START_OR_RESUME_SERVICE -> {
                     if (isFirstRun) {
                         startService()
                         isFirstRun = false
                     } else {
-                        Log.i("Service","Service resumed")
+                        Log.i("Service", "Service resumed")
                     }
                 }
                 ACTION_PAUSE_SERVICE -> {
-                    Log.i("Service","Service paused")
+                    Log.i("Service", "Service paused")
                 }
                 ACTION_STOP_SERVICE -> {
-                    Log.i("Service","Service stopped")
+                    Log.i("Service", "Service stopped")
                 }
                 else -> Log.i("Service", "No such action")
             }
@@ -117,12 +127,13 @@ class StepActivityService : LifecycleService(), SensorEventListener {
     }
 
     private fun startService() {
-        val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        val notificationManager =
+            getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             createNotificationChannel(notificationManager)
         }
 
-        startForeground(NOTIFICATION_ID,notificationBuilder.build())
+        startForeground(NOTIFICATION_ID, notificationBuilder.build())
 
         counter.observe(this) {
             val notification = currentNotificationBuilder.setContentText(it.toString())
@@ -134,13 +145,14 @@ class StepActivityService : LifecycleService(), SensorEventListener {
     private fun saveSteps() {
         CoroutineScope(Dispatchers.IO).launch {
             checkCurrentDate()
-            insertDailyStepsUseCase(currentDate,currentSteps)
+            insertDailyStepsUseCase(currentDate, currentSteps)
         }
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun createNotificationChannel(notificationManager: NotificationManager) {
-        val channel = NotificationChannel(NOTIFICATION_CHANNEL_ID, NOTIFICATION_CHANNEL_NAME, IMPORTANCE_LOW)
+        val channel =
+            NotificationChannel(NOTIFICATION_CHANNEL_ID, NOTIFICATION_CHANNEL_NAME, IMPORTANCE_LOW)
         notificationManager.createNotificationChannel(channel)
     }
 
@@ -154,6 +166,7 @@ class StepActivityService : LifecycleService(), SensorEventListener {
     override fun onAccuracyChanged(p0: Sensor?, p1: Int) {
         println("Accuracy changed")
     }
+
     private fun checkCurrentDate() {
         CoroutineScope(Dispatchers.IO).launch {
             val lastInsertionDate = lastInsertionDateUseCase()
@@ -161,7 +174,7 @@ class StepActivityService : LifecycleService(), SensorEventListener {
             val actualDate = LocalDate.now().format(DateTimeFormatter.ofPattern("yMMdd"))
             println(lastInsertionDate)
             println(actualDate)
-            if (lastInsertionDate != actualDate ) {
+            if (lastInsertionDate != actualDate) {
                 println("nullify")
                 currentSteps = 0
                 currentDate = actualDate
@@ -170,4 +183,4 @@ class StepActivityService : LifecycleService(), SensorEventListener {
             }
         }
     }
-    }
+}

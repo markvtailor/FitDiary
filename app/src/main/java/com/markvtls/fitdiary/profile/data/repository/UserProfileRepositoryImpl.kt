@@ -7,9 +7,10 @@ import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class UserProfileRepositoryImpl @Inject constructor(
-    private val settings: SettingsDataStore): UserProfileRepository {
+    private val settings: SettingsDataStore
+) : UserProfileRepository {
     override suspend fun saveStepsGoal(stepsGoal: Int, context: Context) {
-       settings.saveStepsGoalToPreferencesStore(stepsGoal, context)
+        settings.saveStepsGoalToPreferencesStore(stepsGoal, context)
     }
 
     override suspend fun saveCcalGoal(ccalGoal: Int, context: Context) {

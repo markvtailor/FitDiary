@@ -5,7 +5,7 @@
         android:icon="@drawable/ic_food_menu_option"
         android:title="@string/to_food_list" />
     <item
-        android:id="@+id/userActivityFragment"
+        android:id="@+id/pedometerFragment"
         android:icon="@drawable/ic_activity_menu_option"
         android:title="@string/to_activity_screen" />
     <item

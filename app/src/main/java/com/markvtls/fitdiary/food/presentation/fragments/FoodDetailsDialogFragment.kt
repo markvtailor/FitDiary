@@ -12,17 +12,17 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import com.markvtls.fitdiary.databinding.FoodDetailsFragmentBinding
 import com.markvtls.fitdiary.food.data.source.local.FoodServing
 import com.markvtls.fitdiary.food.presentation.FoodServingViewModel
-import com.markvtls.fitdiary.databinding.FoodDetailsFragmentBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 
 @AndroidEntryPoint
-class FoodDetailsDialogFragment: DialogFragment() {
+class FoodDetailsDialogFragment : DialogFragment() {
 
-    private val viewModel: FoodServingViewModel by viewModels({requireParentFragment()})
+    private val viewModel: FoodServingViewModel by viewModels({ requireParentFragment() })
 
 
     private var _binding: FoodDetailsFragmentBinding? = null
@@ -32,8 +32,8 @@ class FoodDetailsDialogFragment: DialogFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        _binding = FoodDetailsFragmentBinding.inflate(inflater,container,false)
+    ): View {
+        _binding = FoodDetailsFragmentBinding.inflate(inflater, container, false)
             .apply {
                 this.lifecycleOwner = this@FoodDetailsDialogFragment
                 this.viewModel = viewModel
@@ -45,7 +45,7 @@ class FoodDetailsDialogFragment: DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         super.onViewCreated(view, savedInstanceState)
-        val id = arguments?.getInt("FoodId",0)!!
+        val id = arguments?.getInt("FoodId", 0)!!
         if (dialog != null) dialog!!.window!!.setLayout(1100, 1000) ///fix
 
         viewLifecycleOwner.lifecycleScope.launch {

@@ -1,12 +1,11 @@
 package com.markvtls.fitdiary.di
 
 import com.markvtls.fitdiary.food.domain.repository.FoodServingRepository
-import com.markvtls.fitdiary.pedometer.domain.repository.StepActivityRepository
+import com.markvtls.fitdiary.food.domain.use_cases.*
+import com.markvtls.fitdiary.pedometer.domain.repository.PedometerRepository
 import com.markvtls.fitdiary.pedometer.domain.use_cases.GetLastInsertionDateUseCase
 import com.markvtls.fitdiary.pedometer.domain.use_cases.GetStepsByDateUseCase
 import com.markvtls.fitdiary.pedometer.domain.use_cases.InsertDailyStepsUseCase
-import com.markvtls.fitdiary.food.domain.use_cases.DeleteFoodUseCase
-import com.markvtls.fitdiary.food.domain.use_cases.*
 import com.markvtls.fitdiary.profile.domain.repository.UserProfileRepository
 import com.markvtls.fitdiary.profile.domain.use_cases.GetOverviewUseCase
 import com.markvtls.fitdiary.profile.domain.use_cases.GetPreferencesUseCase
@@ -47,12 +46,6 @@ object UseCaseModule {
 
     @Singleton
     @Provides
-    fun provideGetCompleteFoodListUseCase(repository: FoodServingRepository): GetCompleteFoodListUseCase {
-        return GetCompleteFoodListUseCase(repository)
-    }
-
-    @Singleton
-    @Provides
     fun provideGetFoodListByDateUseCase(repository: FoodServingRepository): GetFoodListByDateUseCase {
         return GetFoodListByDateUseCase(repository)
     }
@@ -71,19 +64,19 @@ object UseCaseModule {
 
     @Singleton
     @Provides
-    fun provideGetStepsByDateUseCase(repository: StepActivityRepository): GetStepsByDateUseCase {
+    fun provideGetStepsByDateUseCase(repository: PedometerRepository): GetStepsByDateUseCase {
         return GetStepsByDateUseCase(repository)
     }
 
     @Singleton
     @Provides
-    fun provideInsertDailyStepsUseCase(repository: StepActivityRepository): InsertDailyStepsUseCase {
+    fun provideInsertDailyStepsUseCase(repository: PedometerRepository): InsertDailyStepsUseCase {
         return InsertDailyStepsUseCase(repository)
     }
 
     @Singleton
     @Provides
-    fun provideGetLastInsertionDateUseCase(repository: StepActivityRepository): GetLastInsertionDateUseCase {
+    fun provideGetLastInsertionDateUseCase(repository: PedometerRepository): GetLastInsertionDateUseCase {
         return GetLastInsertionDateUseCase(repository)
     }
 
@@ -101,7 +94,10 @@ object UseCaseModule {
 
     @Singleton
     @Provides
-    fun provideGetOverviewUseCase( foodRepository: FoodServingRepository, pedometerRepository: StepActivityRepository): GetOverviewUseCase {
+    fun provideGetOverviewUseCase(
+        foodRepository: FoodServingRepository,
+        pedometerRepository: PedometerRepository
+    ): GetOverviewUseCase {
         return GetOverviewUseCase(foodRepository, pedometerRepository)
     }
 }

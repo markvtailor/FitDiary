@@ -15,7 +15,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class UserProfileSettingsFragment: Fragment() {
+class UserProfileSettingsFragment : Fragment() {
 
     private val viewModel: UserProfileViewModel by viewModels()
     private var _binding: UserProfileSettingsFragmentBinding? = null
@@ -25,7 +25,7 @@ class UserProfileSettingsFragment: Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = UserProfileSettingsFragmentBinding.inflate(layoutInflater)
         return binding.root
     }
@@ -37,15 +37,17 @@ class UserProfileSettingsFragment: Fragment() {
             saveSettings()
         }
 
-        viewModel.settings.asLiveData().observe(viewLifecycleOwner) {value ->
+        viewModel.settings.asLiveData().observe(viewLifecycleOwner) { value ->
             binding.pedometerToggle.isChecked = value.pedometerState
         }
         binding.save.setOnClickListener {
             saveSettings()
-            val action = UserProfileSettingsFragmentDirections.actionUserProfileSettingsFragmentToUserProfileFragment()
+            val action =
+                UserProfileSettingsFragmentDirections.actionUserProfileSettingsFragmentToUserProfileFragment()
             findNavController().navigate(action)
         }
     }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

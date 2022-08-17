@@ -7,9 +7,6 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface FoodServingDao {
 
-    @Query("SELECT * from foodserving ORDER BY id ASC")
-    fun getAll(): Flow<List<FoodServing>>
-
     @Query("SELECT * from foodserving WHERE date = :date")
     fun getAllByDate(date: String): Flow<List<FoodServing>>
 

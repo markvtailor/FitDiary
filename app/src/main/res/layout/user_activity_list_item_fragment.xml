@@ -44,7 +44,7 @@
             app:textGradientSize="text_only"
             app:textSize="40sp"
             app:progress="0"
-            app:text="0"/>
+            app:text="0" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

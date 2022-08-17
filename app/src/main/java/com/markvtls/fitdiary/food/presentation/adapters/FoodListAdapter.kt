@@ -5,12 +5,13 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.markvtls.fitdiary.food.data.source.local.FoodServing
 import com.markvtls.fitdiary.databinding.FoodListItemBinding
+import com.markvtls.fitdiary.food.data.source.local.FoodServing
 
-class FoodListAdapter(private val onItemClick: (FoodServing) -> Unit): ListAdapter<FoodServing, FoodListAdapter.FoodViewHolder>(
-    DiffCallback
-) {
+class FoodListAdapter(private val onItemClick: (FoodServing) -> Unit) :
+    ListAdapter<FoodServing, FoodListAdapter.FoodViewHolder>(
+        DiffCallback
+    ) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FoodViewHolder {
         val holder = FoodViewHolder(
@@ -29,9 +30,8 @@ class FoodListAdapter(private val onItemClick: (FoodServing) -> Unit): ListAdapt
     }
 
 
-
-
-    class FoodViewHolder(private var binding: FoodListItemBinding): RecyclerView.ViewHolder(binding.root){
+    class FoodViewHolder(private var binding: FoodListItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(foodServing: FoodServing) {
             binding.apply {
                 foodName.text = foodServing.name
@@ -41,9 +41,9 @@ class FoodListAdapter(private val onItemClick: (FoodServing) -> Unit): ListAdapt
     }
 
     companion object {
-        private val DiffCallback = object: DiffUtil.ItemCallback<FoodServing>() {
+        private val DiffCallback = object : DiffUtil.ItemCallback<FoodServing>() {
             override fun areItemsTheSame(oldItem: FoodServing, newItem: FoodServing): Boolean {
-                return  oldItem == newItem
+                return oldItem == newItem
             }
 
             override fun areContentsTheSame(oldItem: FoodServing, newItem: FoodServing): Boolean {

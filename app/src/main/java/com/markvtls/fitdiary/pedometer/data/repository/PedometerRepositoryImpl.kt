@@ -1,26 +1,21 @@
 package com.markvtls.fitdiary.pedometer.data.repository
 
-import android.content.Context
-import android.content.Intent
 import com.markvtls.fitdiary.pedometer.data.source.local.DateHolder
+import com.markvtls.fitdiary.pedometer.data.source.local.PedometerDatabase
 import com.markvtls.fitdiary.pedometer.data.source.local.StepActivity
-import com.markvtls.fitdiary.pedometer.data.source.local.StepActivityDatabase
-import com.markvtls.fitdiary.pedometer.domain.repository.StepActivityRepository
-import com.markvtls.fitdiary.pedometer.presentation.services.StepActivityService
+import com.markvtls.fitdiary.pedometer.domain.repository.PedometerRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class StepActivityRepositoryImpl@Inject constructor(
-    private val appContext: Context,
-    private val database: StepActivityDatabase
-)
-    : StepActivityRepository {
+class PedometerRepositoryImpl @Inject constructor(
+    private val database: PedometerDatabase
+) : PedometerRepository {
     override fun getStepsByDate(date: String): Flow<StepActivity> {
         return database.stepActivityDao().getByDate(date)
     }
 
     override fun getLastInsertionDate(): String {
-       return database.stepActivityDao().getLastInsertionDate()
+        return database.stepActivityDao().getLastInsertionDate()
     }
 
     override fun getAll(): Flow<List<StepActivity>> {
@@ -43,10 +38,4 @@ class StepActivityRepositoryImpl@Inject constructor(
         database.stepActivityDao().deleteByDate(DateHolder(date))
     }
 
-    override fun sendCommandToService(action: String) {
-        Intent( appContext, StepActivityService::class.java).also {
-            it.action = action
-            appContext.startService(it)
-        }
-    }
 }

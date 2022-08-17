@@ -10,6 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/user_profile_fragment">
+
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/app_default_bar"
             app:title="Профиль"
@@ -20,7 +21,8 @@
             android:layout_width="match_parent"
             app:titleTextColor="@color/white"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" />
+
         <Button
             android:id="@+id/to_settings"
             android:text="Настройки"

@@ -7,17 +7,17 @@ import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import com.markvtls.fitdiary.food.presentation.FoodServingViewModel
 import com.markvtls.fitdiary.databinding.FoodAddToListFragmentBinding
+import com.markvtls.fitdiary.food.presentation.FoodServingViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 
 @AndroidEntryPoint
-class AddFoodDialogFragment: DialogFragment() {
+class AddFoodDialogFragment : DialogFragment() {
 
 
-    private val viewModel: FoodServingViewModel by viewModels({requireParentFragment()})
+    private val viewModel: FoodServingViewModel by viewModels({ requireParentFragment() })
 
 
     private var _binding: FoodAddToListFragmentBinding? = null
@@ -27,8 +27,8 @@ class AddFoodDialogFragment: DialogFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        _binding = FoodAddToListFragmentBinding.inflate(inflater,container,false)
+    ): View {
+        _binding = FoodAddToListFragmentBinding.inflate(inflater, container, false)
             .apply {
                 this.lifecycleOwner = this@AddFoodDialogFragment
                 this.viewModel = viewModel
@@ -39,26 +39,25 @@ class AddFoodDialogFragment: DialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         if (dialog != null) dialog!!.window!!.setLayout(1000, 675) ///fix
-        binding.submitButton.setOnClickListener{
+        binding.submitButton.setOnClickListener {
             if (isInputValid()) {
                 addFoodToList()
                 dialog?.dismiss()
             }
 
         }
-        println(arguments?.get("FoodId"))
-        println(requireParentFragment())
         super.onViewCreated(view, savedInstanceState)
     }
+
     private fun addFoodToList() {
 
-        val id = arguments?.getInt("FoodId",0)!!
+        val id = arguments?.getInt("FoodId", 0)!!
         val name = binding.foodNameInput.text.toString()
         val amount = binding.foodAmountInput.text.toString()
         lifecycleScope.launch {
             viewModel.getNutrition(id, name, amount.toInt())
         }
-        }
+    }
 
     private fun isInputValid(): Boolean {
         val nameInput = binding.foodNameInput
@@ -85,6 +84,7 @@ class AddFoodDialogFragment: DialogFragment() {
         }
         return conditions == 0
     }
+
     companion object {
         const val TAG = "Addition Dialog"
     }

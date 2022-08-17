@@ -9,6 +9,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/app_default_bar"
             app:title="Персональные цели"
@@ -19,7 +20,8 @@
             android:layout_width="match_parent"
             app:titleTextColor="@color/white"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" />
+
         <TextView
             android:id="@+id/steps_goal"
             android:text="Шаги"
@@ -27,7 +29,7 @@
             android:layout_height="wrap_content"
             android:textSize="32sp"
             app:layout_constraintTop_toBottomOf="@id/app_default_bar"
-            app:layout_constraintStart_toStartOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
             android:id="@+id/ccal_goal"
@@ -36,7 +38,7 @@
             android:layout_height="wrap_content"
             android:textSize="32sp"
             app:layout_constraintTop_toBottomOf="@id/steps_goal"
-            app:layout_constraintStart_toStartOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent" />
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/steps_text"
@@ -44,8 +46,7 @@
             android:layout_height="36dp"
             android:layout_marginTop="6dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/app_default_bar"
-            />
+            app:layout_constraintTop_toBottomOf="@id/app_default_bar" />
 
 
         <com.google.android.material.textfield.TextInputEditText
@@ -54,13 +55,13 @@
             android:layout_height="36dp"
             android:layout_marginTop="6dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/steps_text"
-            />
+            app:layout_constraintTop_toBottomOf="@id/steps_text" />
+
         <Button
             android:text="Сохранить"
             android:id="@+id/save"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintBottom_toBottomOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

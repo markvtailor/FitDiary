@@ -3,7 +3,7 @@ package com.markvtls.fitdiary.pedometer.domain.repository
 import com.markvtls.fitdiary.pedometer.data.source.local.StepActivity
 import kotlinx.coroutines.flow.Flow
 
-interface StepActivityRepository {
+interface PedometerRepository {
 
     fun getStepsByDate(date: String): Flow<StepActivity>
 
@@ -18,7 +18,5 @@ interface StepActivityRepository {
     suspend fun insertDailySteps(stepActivity: StepActivity)
 
     suspend fun deleteByDate(date: String)
-
-    fun sendCommandToService(action: String)
 
 }

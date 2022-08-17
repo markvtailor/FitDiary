@@ -16,7 +16,7 @@ import java.util.*
 @AndroidEntryPoint
 class DatePickerDialogFragment : DialogFragment(), DatePickerDialog.OnDateSetListener {
 
-    private val viewModel: FoodServingViewModel by viewModels(ownerProducer = { requireParentFragment()})
+    private val viewModel: FoodServingViewModel by viewModels(ownerProducer = { requireParentFragment() })
 
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -29,10 +29,10 @@ class DatePickerDialogFragment : DialogFragment(), DatePickerDialog.OnDateSetLis
     }
 
     override fun onDateSet(view: DatePicker, year: Int, month: Int, day: Int) {
-            viewModel.chooseDate(day, month, year)
-            viewModel.getFoodListByDate(viewModel.chosenDate!!)
+        viewModel.chooseDate(day, month, year)
+        viewModel.getFoodListByDate(viewModel.chosenDate!!)
 
-        }
+    }
 
     override fun onDismiss(dialog: DialogInterface) {
         super.onDismiss(dialog)

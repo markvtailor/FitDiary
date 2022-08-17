@@ -21,7 +21,8 @@
             android:layout_width="match_parent"
             app:titleTextColor="@color/white"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" />
+
         <TextView
             android:id="@+id/pedometerSetting"
             android:text="Включить шагомер"
@@ -29,7 +30,8 @@
             android:layout_height="wrap_content"
             android:textSize="32sp"
             app:layout_constraintTop_toBottomOf="@id/app_default_bar"
-            app:layout_constraintStart_toStartOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent" />
+
         <ToggleButton
             android:id="@+id/pedometerToggle"
             android:layout_width="80dp"
@@ -38,11 +40,12 @@
             app:layout_constraintStart_toEndOf="@id/pedometerSetting"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/app_default_bar" />
+
         <Button
             android:text="Сохранить"
             android:id="@+id/save"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintBottom_toBottomOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

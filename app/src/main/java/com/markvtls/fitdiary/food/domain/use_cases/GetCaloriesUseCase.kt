@@ -7,7 +7,7 @@ import javax.inject.Inject
 class GetCaloriesUseCase @Inject constructor(
     private val repository: FoodServingRepository
 ) {
-    operator fun invoke(date: String): Flow<Int>  {
+    operator fun invoke(date: String): Flow<Int> {
         return repository.getCcalSum(date)
     }
 

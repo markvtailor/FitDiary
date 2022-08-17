@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
     app:startDestination="@id/userProfileFragment">
-    <action android:id="@+id/action_global_user_activity_fragment"
-        app:destination="@id/userActivityFragment"
+    <action
+        android:id="@+id/action_global_user_activity_fragment"
+        app:destination="@id/pedometerFragment"
         app:launchSingleTop="true" />
     <fragment
         android:id="@+id/foodListFragment"
         android:name="com.markvtls.fitdiary.food.presentation.fragments.FoodListFragment"
-        android:label="FoodListFragment" >
+        android:label="FoodListFragment">
         <argument
             android:name="additionState"
             app:argType="boolean"
             android:defaultValue="false" />
     </fragment>
     <fragment
-        android:id="@+id/userActivityFragment"
-        android:name="com.markvtls.fitdiary.pedometer.presentation.fragments.UserActivityFragment"
+        android:id="@+id/pedometerFragment"
+        android:name="com.markvtls.fitdiary.pedometer.presentation.fragments.PedometerFragment"
         android:label="UserActivityFragment" />
     <fragment
         android:id="@+id/userProfileFragment"
         android:name="com.markvtls.fitdiary.profile.presentation.fragments.UserProfileFragment"
-        android:label="UserProfileFragment" >
+        android:label="UserProfileFragment">
         <action
             android:id="@+id/action_userProfileFragment_to_userProfileSettingsFragment"
             app:destination="@id/userProfileSettingsFragment" />
@@ -41,7 +41,7 @@
     <fragment
         android:id="@+id/userProfileSettingsFragment"
         android:name="com.markvtls.fitdiary.profile.presentation.fragments.UserProfileSettingsFragment"
-        android:label="UserProfileSettingsFragment" >
+        android:label="UserProfileSettingsFragment">
         <action
             android:id="@+id/action_userProfileSettingsFragment_to_userProfileFragment"
             app:destination="@id/userProfileFragment"
@@ -51,7 +51,7 @@
     <fragment
         android:id="@+id/userProfilePreferencesFragment"
         android:name="com.markvtls.fitdiary.profile.presentation.fragments.UserProfilePreferencesFragment"
-        android:label="UserProfilePreferencesFragment" >
+        android:label="UserProfilePreferencesFragment">
         <action
             android:id="@+id/action_userProfilePreferencesFragment_to_userProfileFragment"
             app:destination="@id/userProfileFragment"

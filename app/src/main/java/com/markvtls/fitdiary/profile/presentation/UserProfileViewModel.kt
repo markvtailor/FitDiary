@@ -3,24 +3,14 @@ package com.markvtls.fitdiary.profile.presentation
 import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
-import com.markvtls.fitdiary.food.domain.model.CaloriesForDay
-import com.markvtls.fitdiary.food.domain.use_cases.GetCaloriesForWeekUseCase
-import com.markvtls.fitdiary.pedometer.data.source.local.StepActivity
-import com.markvtls.fitdiary.pedometer.data.source.local.toDomain
-import com.markvtls.fitdiary.pedometer.domain.model.StepActivityDomain
-import com.markvtls.fitdiary.pedometer.domain.use_cases.GetStepsForLastWeekUseCase
 import com.markvtls.fitdiary.profile.domain.model.DayOverview
 import com.markvtls.fitdiary.profile.domain.model.Preferences
 import com.markvtls.fitdiary.profile.domain.model.Settings
 import com.markvtls.fitdiary.profile.domain.use_cases.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -31,7 +21,7 @@ class UserProfileViewModel @Inject constructor(
     private val saveSettings: SaveSettingsUseCase,
     private val savePreferences: SavePreferencesUseCase,
     private val getOverview: GetOverviewUseCase
-): ViewModel() {
+) : ViewModel() {
 
 
     private lateinit var _settings: Flow<Settings>

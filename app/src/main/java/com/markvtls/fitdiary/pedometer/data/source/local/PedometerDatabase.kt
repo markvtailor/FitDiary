@@ -6,20 +6,20 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 
 @Database(entities = [StepActivity::class], version = 1, exportSchema = false)
-abstract class StepActivityDatabase: RoomDatabase() {
+abstract class PedometerDatabase : RoomDatabase() {
 
-    abstract fun stepActivityDao(): StepActivityDao
+    abstract fun stepActivityDao(): PedometerDao
 
     companion object {
         @Volatile
-        private var INSTANCE: StepActivityDatabase? = null
+        private var INSTANCE: PedometerDatabase? = null
 
 
-        fun getDatabase(context: Context): StepActivityDatabase {
+        fun getDatabase(context: Context): PedometerDatabase {
             return INSTANCE ?: synchronized(this) {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
-                    StepActivityDatabase::class.java,
+                    PedometerDatabase::class.java,
                     "step_database"
                 )
                     .fallbackToDestructiveMigration()

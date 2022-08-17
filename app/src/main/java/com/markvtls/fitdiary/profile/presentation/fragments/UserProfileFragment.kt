@@ -10,13 +10,13 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.asLiveData
 import androidx.navigation.fragment.findNavController
 import com.markvtls.fitdiary.databinding.UserProfileFragmentBinding
-import com.markvtls.fitdiary.pedometer.presentation.services.StepActivityService
+import com.markvtls.fitdiary.pedometer.presentation.services.PedometerService
 import com.markvtls.fitdiary.profile.presentation.UserProfileViewModel
 import com.markvtls.fitdiary.utils.Constants
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class UserProfileFragment: Fragment() {
+class UserProfileFragment : Fragment() {
 
     private val viewModel: UserProfileViewModel by viewModels()
     private var _binding: UserProfileFragmentBinding? = null
@@ -26,32 +26,36 @@ class UserProfileFragment: Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = UserProfileFragmentBinding.inflate(layoutInflater)
-        val view = binding.root
-        return view
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.toSettings.setOnClickListener {
-            val action = UserProfileFragmentDirections.actionUserProfileFragmentToUserProfileSettingsFragment()
+            val action =
+                UserProfileFragmentDirections.actionUserProfileFragmentToUserProfileSettingsFragment()
             findNavController().navigate(action)
         }
 
         binding.toPreferences.setOnClickListener {
-            val action = UserProfileFragmentDirections.actionUserProfileFragmentToUserProfilePreferencesFragment()
+            val action =
+                UserProfileFragmentDirections.actionUserProfileFragmentToUserProfilePreferencesFragment()
             findNavController().navigate(action)
         }
 
         binding.toOverview.setOnClickListener {
-            val action = UserProfileFragmentDirections.actionUserProfileFragmentToUserProfileOverviewFragment()
+            val action =
+                UserProfileFragmentDirections.actionUserProfileFragmentToUserProfileOverviewFragment()
             findNavController().navigate(action)
         }
-        viewModel.settings.asLiveData().observe(viewLifecycleOwner) {settings ->
-            sendCommandToPedometerService(Constants.ACTION_START_OR_RESUME_SERVICE, settings.pedometerState)
+        viewModel.settings.asLiveData().observe(viewLifecycleOwner) { settings ->
+            sendCommandToPedometerService(
+                Constants.ACTION_START_OR_RESUME_SERVICE,
+                settings.pedometerState
+            )
         }
-
 
 
     }
@@ -64,7 +68,7 @@ class UserProfileFragment: Fragment() {
 
     private fun sendCommandToPedometerService(action: String, pedometerState: Boolean) {
         if (pedometerState) {
-            Intent(requireContext(), StepActivityService::class.java).also {
+            Intent(requireContext(), PedometerService::class.java).also {
                 it.action = action
                 requireContext().startService(it)
             }

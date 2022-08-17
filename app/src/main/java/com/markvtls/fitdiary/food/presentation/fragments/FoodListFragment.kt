@@ -1,20 +1,26 @@
 package com.markvtls.fitdiary.food.presentation.fragments
 
 import android.os.Bundle
-import android.view.*
-import androidx.fragment.app.*
-import androidx.lifecycle.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.observe
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.markvtls.fitdiary.R
-import com.markvtls.fitdiary.food.presentation.FoodServingViewModel
 import com.markvtls.fitdiary.databinding.FoodListFragmentBinding
+import com.markvtls.fitdiary.food.presentation.FoodServingViewModel
 import com.markvtls.fitdiary.food.presentation.adapters.FoodListAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class FoodListFragment: Fragment() {
+class FoodListFragment : Fragment() {
 
 
     private val viewModel: FoodServingViewModel by viewModels()
@@ -24,17 +30,17 @@ class FoodListFragment: Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        childFragmentManager.setFragmentResultListener("requestKey",this) { _, bundle ->
+        childFragmentManager.setFragmentResultListener("requestKey", this) { _, bundle ->
             val result = bundle.getString("bundleKey")
             if (result == "done") {
                 refreshUi()
-                 }else if (result!!.toInt() > 0) {
-                     addNewFood(result.toInt())
+            } else if (result!!.toInt() > 0) {
+                addNewFood(result.toInt())
             }
-                 }
+        }
 
 
-            }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -63,23 +69,22 @@ class FoodListFragment: Fragment() {
         }
 
         binding.foodListToolbar.setOnMenuItemClickListener {
-            when(it.itemId) {
+            when (it.itemId) {
                 R.id.calendar -> {
                     showDatePickerDialog()
                     true
-                } else -> false
+                }
+                else -> false
             }
         }
         viewModel.status.observe(viewLifecycleOwner) {
             when (it.case) {
-                "SUCCESS" -> println("start")
+                "SUCCESS" -> println()
                 "INVALID WORD" -> notifyAboutRequestResult(it.case)
                 "INVALID TOKEN" -> notifyAboutRequestResult(it.case)
                 "CONNECTION IS MISSING" -> notifyAboutRequestResult(it.case)
             }
         }
-
-
     }
 
 
@@ -100,7 +105,6 @@ class FoodListFragment: Fragment() {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.RESUMED) {
                 viewModel.foodList.collect {
                     foodListAdapter.submitList(it)
-
                 }
             }
         }
@@ -111,10 +115,14 @@ class FoodListFragment: Fragment() {
                 try {
 
                     viewModel.getCcalSum(date).collect {
-                        if (it > ccalPreference) binding.foodCcalLabel.setTextColor(resources.getColor(R.color.red)) else binding.foodCcalLabel.setTextColor(resources.getColor(R.color.black))
-                        binding.foodCcalLabel.text = getString(R.string.Ccal, it)
+                        if (it > ccalPreference) binding.foodCcalLabel.setTextColor(
+                            resources.getColor(
+                                R.color.red
+                            )
+                        ) else binding.foodCcalLabel.setTextColor(resources.getColor(R.color.black))
+                        binding.foodCcalLabel.text = getString(R.string.Ccal, it.toString())
                     }
-                }catch (e: Exception) {
+                } catch (e: Exception) {
                     binding.foodCcalLabel.text = "Ккал: 0"
                 }
             }
@@ -122,23 +130,24 @@ class FoodListFragment: Fragment() {
     }
 
 
-
     override fun onDestroyView() {
         super.onDestroyView()
         println(viewModel.status.value)
         _binding = null
     }
+
     private fun addNewFood(id: Int) {
         val dialogFragment = AddFoodDialogFragment()
         val args = Bundle()
-        args.putInt("FoodId",id)
+        args.putInt("FoodId", id)
         dialogFragment.arguments = args
         dialogFragment.show(childFragmentManager, AddFoodDialogFragment.TAG)
     }
+
     private fun showDetails(id: Int) {
         val dialogFragment = FoodDetailsDialogFragment()
         val args = Bundle()
-        args.putInt("FoodId",id)
+        args.putInt("FoodId", id)
         dialogFragment.arguments = args
         dialogFragment.show(childFragmentManager, FoodDetailsDialogFragment.TAG)
     }
@@ -146,7 +155,8 @@ class FoodListFragment: Fragment() {
     private fun notifyAboutRequestResult(cause: String) {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.RESUMED) {
-                Snackbar.make(requireView(), "Ошибка при добавлении: $cause", Snackbar.LENGTH_LONG).show()
+                Snackbar.make(requireView(), "Ошибка при добавлении: $cause", Snackbar.LENGTH_LONG)
+                    .show()
             }
         }
         viewModel.notificationCheck()

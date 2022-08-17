@@ -13,7 +13,7 @@ class StepActivity(
     val steps: Int
 )
 
-data class DateHolder (val date: String)
+data class DateHolder(val date: String)
 
 
 fun StepActivity.toDomain(): StepActivityDomain {
@@ -22,7 +22,6 @@ fun StepActivity.toDomain(): StepActivityDomain {
     val month = "${date[4]}${date[5]}".toInt()
     val day = "${date[6]}${date[7]}".toInt()
     val dateDomain = LocalDate.of(year, month, day).format(formatter).toString()
-    //val dateDomain = date
     val calories = steps / 25
 
     return StepActivityDomain(dateDomain, steps, calories)

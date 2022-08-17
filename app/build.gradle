@@ -33,6 +33,7 @@ android {
         }
     }
     compileOptions {
+        coreLibraryDesugaringEnabled = true
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
@@ -51,9 +52,6 @@ dependencies {
     //DataStore
     implementation "androidx.datastore:datastore-preferences:1.0.0"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.5.1"
-    
-    //AndroidChart
-    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 
     // Kotlin + coroutines
     implementation("androidx.work:work-runtime-ktx:2.7.1")
@@ -70,7 +68,6 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-moshi:2.9.0'
     implementation 'com.squareup.moshi:moshi-kotlin:1.13.0'
     implementation "androidx.work:work-runtime-ktx:2.7.1"
-
 
 
     // Room
@@ -91,7 +88,7 @@ dependencies {
 
     // Jetpack Compose Integration
     implementation("androidx.navigation:navigation-compose:$nav_version")
-
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.1.6")
     implementation 'androidx.core:core-ktx:1.8.0'
     implementation 'androidx.appcompat:appcompat:1.4.2'
     implementation 'com.google.android.material:material:1.6.1'

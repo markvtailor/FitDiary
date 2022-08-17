@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.markvtls.fitdiary.food.presentation.FoodServingViewModel" />
@@ -11,6 +12,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/app_default_bar"
             app:title="Подробности"
@@ -21,7 +23,8 @@
             android:layout_width="match_parent"
             app:titleTextColor="@color/white"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" />
+
         <TextView
             android:id="@+id/food_name"
             android:layout_width="wrap_content"
@@ -29,8 +32,8 @@
             android:textSize="32sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/app_default_bar"
-            />
+            app:layout_constraintTop_toBottomOf="@id/app_default_bar" />
+
         <TextView
             android:id="@+id/food_details_serving_label"
             android:paddingStart="6dp"
@@ -39,7 +42,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/food_name"
             android:text="Serving(gramm):"
-            android:textSize="28sp"/>
+            android:textSize="28sp" />
+
         <TextView
             android:id="@+id/food_details_serving"
             android:paddingEnd="16dp"
@@ -47,7 +51,8 @@
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/food_name"
-            android:textSize="28sp"/>
+            android:textSize="28sp" />
+
         <TextView
             android:id="@+id/food_details_ccal_label"
             android:paddingStart="6dp"
@@ -56,7 +61,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/food_details_serving_label"
             android:text="Ccal:"
-            android:textSize="28sp"/>
+            android:textSize="28sp" />
+
         <TextView
             android:id="@+id/food_details_ccal"
             android:paddingEnd="16dp"
@@ -64,7 +70,8 @@
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/food_details_serving"
-            android:textSize="28sp"/>
+            android:textSize="28sp" />
+
         <TextView
             android:id="@+id/food_details_protein_label"
             android:paddingStart="6dp"
@@ -73,7 +80,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/food_details_ccal_label"
             android:text="Protein:"
-            android:textSize="28sp"/>
+            android:textSize="28sp" />
+
         <TextView
             android:id="@+id/food_details_protein"
             android:paddingEnd="16dp"
@@ -81,7 +89,8 @@
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/food_details_ccal"
-            android:textSize="28sp"/>
+            android:textSize="28sp" />
+
         <TextView
             android:id="@+id/food_details_carbon_label"
             android:paddingStart="6dp"
@@ -90,7 +99,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/food_details_protein_label"
             android:text="Carbohydrates:"
-            android:textSize="28sp"/>
+            android:textSize="28sp" />
+
         <TextView
             android:id="@+id/food_details_carbon"
             android:paddingEnd="16dp"
@@ -98,7 +108,8 @@
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/food_details_protein"
-            android:textSize="28sp"/>
+            android:textSize="28sp" />
+
         <TextView
             android:id="@+id/food_details_fat_label"
             android:paddingStart="6dp"
@@ -107,7 +118,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/food_details_carbon_label"
             android:text="Fats:"
-            android:textSize="28sp"/>
+            android:textSize="28sp" />
+
         <TextView
             android:id="@+id/food_details_fat"
             android:paddingEnd="16dp"
@@ -115,7 +127,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/food_details_carbon"
-            android:textSize="28sp"/>
+            android:textSize="28sp" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/food_edit_button"

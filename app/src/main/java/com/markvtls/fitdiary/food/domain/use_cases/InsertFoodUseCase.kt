@@ -10,7 +10,13 @@ import javax.inject.Inject
 class InsertFoodUseCase @Inject constructor(
     private val repository: FoodServingRepository
 ) {
-    suspend operator fun invoke(id: Int, name: String, amount: Int, nutrition: List<FoodNutrition>, date: String) {
+    suspend operator fun invoke(
+        id: Int,
+        name: String,
+        amount: Int,
+        nutrition: List<FoodNutrition>,
+        date: String
+    ) {
         val food = FoodServing(id, name, amount, 0.0, 0.0, 0.0, 0.0, date)
         nutrition.forEach {
             food.ccal += it.calories.toDouble()

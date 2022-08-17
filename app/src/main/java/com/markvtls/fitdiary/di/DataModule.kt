@@ -1,16 +1,16 @@
 package com.markvtls.fitdiary.di
 
 import android.content.Context
+import com.markvtls.fitdiary.food.data.repository.FoodServingRepositoryImpl
 import com.markvtls.fitdiary.food.data.source.local.FoodServingDao
 import com.markvtls.fitdiary.food.data.source.local.FoodServingDatabase
-import com.markvtls.fitdiary.pedometer.data.source.local.StepActivityDao
-import com.markvtls.fitdiary.pedometer.data.source.local.StepActivityDatabase
-import com.markvtls.fitdiary.food.data.repository.FoodServingRepositoryImpl
-import com.markvtls.fitdiary.food.domain.repository.FoodServingRepository
 import com.markvtls.fitdiary.food.data.source.network.FoodNameTranslationApiService
 import com.markvtls.fitdiary.food.data.source.network.FoodNutritionApiService
-import com.markvtls.fitdiary.pedometer.data.repository.StepActivityRepositoryImpl
-import com.markvtls.fitdiary.pedometer.domain.repository.StepActivityRepository
+import com.markvtls.fitdiary.food.domain.repository.FoodServingRepository
+import com.markvtls.fitdiary.pedometer.data.repository.PedometerRepositoryImpl
+import com.markvtls.fitdiary.pedometer.data.source.local.PedometerDao
+import com.markvtls.fitdiary.pedometer.data.source.local.PedometerDatabase
+import com.markvtls.fitdiary.pedometer.domain.repository.PedometerRepository
 import com.markvtls.fitdiary.profile.data.SettingsDataStore
 import com.markvtls.fitdiary.profile.data.repository.UserProfileRepositoryImpl
 import com.markvtls.fitdiary.profile.domain.repository.UserProfileRepository
@@ -40,25 +40,29 @@ object DataModule {
 
     @Provides
     @Singleton
-    fun provideFoodServingRepository(database: FoodServingDatabase, @TranslationRetrofitClient TranslationApi: FoodNameTranslationApiService, @NutritionRetrofitClient NutritionApi: FoodNutritionApiService): FoodServingRepository {
+    fun provideFoodServingRepository(
+        database: FoodServingDatabase,
+        @TranslationRetrofitClient TranslationApi: FoodNameTranslationApiService,
+        @NutritionRetrofitClient NutritionApi: FoodNutritionApiService
+    ): FoodServingRepository {
         return FoodServingRepositoryImpl(database, TranslationApi, NutritionApi)
     }
 
     @Provides
-    fun provideStepActivityDao(database: StepActivityDatabase): StepActivityDao {
+    fun provideStepActivityDao(database: PedometerDatabase): PedometerDao {
         return database.stepActivityDao()
     }
 
     @Provides
     @Singleton
-    fun provideStepActivityDatabase(@ApplicationContext context: Context): StepActivityDatabase {
-        return StepActivityDatabase.getDatabase(context)
+    fun provideStepActivityDatabase(@ApplicationContext context: Context): PedometerDatabase {
+        return PedometerDatabase.getDatabase(context)
     }
 
     @Provides
     @Singleton
-    fun provideStepActivityRepository(@ApplicationContext context: Context, database: StepActivityDatabase): StepActivityRepository {
-        return StepActivityRepositoryImpl(context, database)
+    fun provideStepActivityRepository(database: PedometerDatabase): PedometerRepository {
+        return PedometerRepositoryImpl(database)
     }
 
     @Provides

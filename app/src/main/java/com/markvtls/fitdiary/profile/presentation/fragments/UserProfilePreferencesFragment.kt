@@ -16,7 +16,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class UserProfilePreferencesFragment: Fragment() {
+class UserProfilePreferencesFragment : Fragment() {
 
 
     private val viewModel: UserProfileViewModel by viewModels()
@@ -27,7 +27,7 @@ class UserProfilePreferencesFragment: Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = UserProfilePersonalPreferencesFragmentBinding.inflate(layoutInflater)
         return binding.root
     }
@@ -35,7 +35,7 @@ class UserProfilePreferencesFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.preferences.asLiveData().observe(viewLifecycleOwner) {value ->
+        viewModel.preferences.asLiveData().observe(viewLifecycleOwner) { value ->
             binding.caloriesText.setText(value.ccalGoal.toString(), TextView.BufferType.EDITABLE)
             binding.stepsText.setText(value.stepsGoal.toString(), TextView.BufferType.EDITABLE)
         }
@@ -50,7 +50,8 @@ class UserProfilePreferencesFragment: Fragment() {
         }
         binding.save.setOnClickListener {
             savePreferences()
-            val action = UserProfilePreferencesFragmentDirections.actionUserProfilePreferencesFragmentToUserProfileFragment()
+            val action =
+                UserProfilePreferencesFragmentDirections.actionUserProfilePreferencesFragmentToUserProfileFragment()
             findNavController().navigate(action)
         }
     }
@@ -62,7 +63,11 @@ class UserProfilePreferencesFragment: Fragment() {
 
     private fun savePreferences() {
         lifecycleScope.launch {
-            viewModel.saveNewPreferences( binding.caloriesText.text.toString().toInt(), binding.stepsText.text.toString().toInt(), requireContext())
+            viewModel.saveNewPreferences(
+                binding.caloriesText.text.toString().toInt(),
+                binding.stepsText.text.toString().toInt(),
+                requireContext()
+            )
         }
     }
 

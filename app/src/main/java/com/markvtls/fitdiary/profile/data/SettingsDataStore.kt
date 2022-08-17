@@ -11,6 +11,10 @@ import java.io.IOException
 
 
 private const val SETTINGS = "user_settings"
+private val IS_PEDOMETER_ON = booleanPreferencesKey("is_pedometer_on")
+private val STEPS_GOAL = intPreferencesKey("steps_goal")
+private val CCAL_GOAL = intPreferencesKey("ccal_goal")
+
 
 private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(
     name = SETTINGS
@@ -18,9 +22,6 @@ private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(
 
 class SettingsDataStore(context: Context) {
 
-    private val IS_PEDOMETER_ON = booleanPreferencesKey("is_pedometer_on")
-    private val STEPS_GOAL = intPreferencesKey("steps_goal")
-    private val CCAL_GOAL = intPreferencesKey("ccal_goal")
 
     suspend fun savePedometerStateToPreferencesStore(isPedometerOn: Boolean, context: Context) {
         context.dataStore.edit { preferences ->

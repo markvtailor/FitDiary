@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
-class GetPreferencesUseCase  @Inject constructor(
+class GetPreferencesUseCase @Inject constructor(
     private val repository: UserProfileRepository
 ) {
     operator fun invoke(): Flow<Preferences> = flow {

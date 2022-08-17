@@ -1,17 +1,18 @@
 package com.markvtls.fitdiary.food.presentation
 
-import androidx.lifecycle.*
-import com.markvtls.fitdiary.food.data.source.local.FoodServing
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.markvtls.fitdiary.food.data.dto.FoodNutrition
 import com.markvtls.fitdiary.food.data.dto.TranslationRequest
-import com.markvtls.fitdiary.food.domain.use_cases.DeleteFoodUseCase
+import com.markvtls.fitdiary.food.data.source.local.FoodServing
 import com.markvtls.fitdiary.food.domain.use_cases.*
 import com.markvtls.fitdiary.profile.domain.model.Preferences
 import com.markvtls.fitdiary.profile.domain.use_cases.GetPreferencesUseCase
 import com.markvtls.fitdiary.utils.InvalidWordException
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import java.net.UnknownHostException
 import java.time.LocalDate
@@ -27,8 +28,8 @@ class FoodServingViewModel @Inject constructor(
     private val getByDate: GetFoodListByDateUseCase,
     private val getOneFoodById: GetOneFoodByIdUseCase,
     private val getCalories: GetCaloriesUseCase,
-    private val getPreferences: GetPreferencesUseCase
-): ViewModel() {
+    getPreferences: GetPreferencesUseCase
+) : ViewModel() {
 
     enum class ExceptionCases(val case: String) {
         SUCCESS("SUCCESS"),
@@ -36,18 +37,18 @@ class FoodServingViewModel @Inject constructor(
         INVALID_TOKEN("INVALID TOKEN"),
         MISSING_CONNECTION("CONNECTION IS MISSING")
     }
+
     private var _status = MutableLiveData(ExceptionCases.SUCCESS)
     val status: LiveData<ExceptionCases> get() = _status
-
     private var _currentDate = LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-y"))
     private var _chosenDate: String? = null
     val chosenDate get() = _chosenDate
-    val currentDate get() = _currentDate
+    val currentDate: String get() = _currentDate
 
     private var _nutritionList: List<FoodNutrition>? = null
-    val nutritionList get() = _nutritionList
+    private val nutritionList get() = _nutritionList
 
-    private lateinit var _preferences: Flow<Preferences>
+    private var _preferences: Flow<Preferences>
     private lateinit var _foodList: Flow<List<FoodServing>>
     val foodList get() = _foodList
     val preferences get() = _preferences
@@ -60,7 +61,7 @@ class FoodServingViewModel @Inject constructor(
     }
 
     fun getCcalSum(date: String): Flow<Int> {
-            return getCalories(date)
+        return getCalories(date)
     }
 
     fun getOneById(id: Int): Flow<FoodServing> {
@@ -78,7 +79,7 @@ class FoodServingViewModel @Inject constructor(
     }
 
 
-    private  fun getFoodInfo(id: Int, name: String, amount: Int) { //refactoring required
+    private fun getFoodInfo(id: Int, name: String, amount: Int) { //refactoring required
         var translation = ""
         val translate = TranslationRequest(texts = name)
         viewModelScope.launch {
@@ -90,15 +91,13 @@ class FoodServingViewModel @Inject constructor(
                     _nutritionList = it
                 }
                 if (nutritionList.isNullOrEmpty()) throw InvalidWordException("Invalid word")
-                insert.invoke(id,name, amount, nutritionList!!, currentDate)
+                insert.invoke(id, name, amount, nutritionList!!, currentDate)
             } catch (e: InvalidWordException) {
-                println(e.printStackTrace())
                 _status.value = ExceptionCases.INVALID_WORD
             } catch (e: UnknownHostException) {
-                println(e.printStackTrace())
                 _status.value = ExceptionCases.MISSING_CONNECTION
             } catch (e: Exception) {
-                println(e.printStackTrace())
+                e.printStackTrace()
                 _status.value = ExceptionCases.INVALID_TOKEN
             }
         }
@@ -116,7 +115,6 @@ class FoodServingViewModel @Inject constructor(
     fun notificationCheck() {
         _status.value = ExceptionCases.SUCCESS
     }
-
 
 
 }
