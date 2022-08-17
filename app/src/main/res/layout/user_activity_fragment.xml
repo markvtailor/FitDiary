@@ -14,8 +14,8 @@
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/steps_list_toolbar"
             app:title="Ваша активность"
-            android:theme="?attr/actionBarTheme"
-            android:background="@color/design_default_color_primary"
+            android:theme="@style/Theme.FitDiary"
+            android:background="@color/primaryColor"
             android:minHeight="?attr/actionBarSize"
             style="@style/Widget.Material3.ActionBar.Solid"
             android:layout_width="match_parent"

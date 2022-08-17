@@ -14,8 +14,8 @@
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/app_default_bar"
             app:title="Профиль"
-            android:theme="?attr/actionBarTheme"
-            android:background="@color/design_default_color_primary"
+            android:theme="@style/Theme.FitDiary"
+            android:background="@color/primaryColor"
             android:minHeight="?attr/actionBarSize"
             style="@style/Widget.Material3.ActionBar.Solid"
             android:layout_width="match_parent"
@@ -23,26 +23,55 @@
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/to_settings"
-            android:text="Настройки"
+            android:text="@string/profile_settings"
+            android:textSize="32sp"
+            android:textColor="@color/black"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
+            android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/app_default_bar" />
 
-        <Button
-            android:id="@+id/to_preferences"
-            android:text="Цели"
+        <View
+            app:layout_constraintTop_toBottomOf="@id/to_settings"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
+            android:layout_height="1dp"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"
+            android:background="@color/black"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/to_preferences"
+            android:text="@string/profile_preferences"
+            android:textSize="32sp"
+            android:textColor="@color/black"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/to_settings" />
 
-        <Button
+        <View
+            app:layout_constraintTop_toBottomOf="@id/to_preferences"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"
+            android:background="@color/black"/>
+
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/to_overview"
-            android:text="Отчёт за неделю"
+            android:text="@string/profile_overview"
+            android:textSize="32sp"
+            android:textColor="@color/black"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             app:layout_constraintTop_toBottomOf="@id/to_preferences" />
+        <View
+            app:layout_constraintTop_toBottomOf="@id/to_overview"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"
+            android:background="@color/black"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

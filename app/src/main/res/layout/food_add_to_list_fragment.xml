@@ -17,8 +17,8 @@
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/app_default_bar"
             app:title="Добавление..."
-            android:theme="?attr/actionBarTheme"
-            android:background="@color/design_default_color_primary"
+            android:theme="@style/Theme.FitDiary"
+            android:background="@color/primaryColor"
             android:minHeight="?attr/actionBarSize"
             style="@style/Widget.Material3.ActionBar.Solid"
             android:layout_width="match_parent"
@@ -31,7 +31,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/app_default_bar"
-            android:hint="Название..."
+            android:hint="@string/add_to_list_name"
             style="@style/ThemeOverlay.Material3.TextInputEditText.FilledBox">
 
 
@@ -50,9 +50,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/food_name_input_layout"
-            android:hint="Грамм..."
+            android:hint="@string/add_to_list_gramm"
             style="@style/ThemeOverlay.Material3.TextInputEditText.FilledBox">
-
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/food_amount_input"
@@ -66,7 +65,7 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/submit_button"
-            android:text="Сохранить"
+            android:text="@string/add_to_list_save"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"

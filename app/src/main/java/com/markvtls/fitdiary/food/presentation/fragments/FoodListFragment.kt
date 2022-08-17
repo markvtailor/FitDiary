@@ -10,6 +10,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.observe
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.markvtls.fitdiary.R
@@ -100,6 +101,8 @@ class FoodListFragment : Fragment() {
         val foodListAdapter = FoodListAdapter {
             showDetails(it.id)
         }
+        val divider = DividerItemDecoration(recyclerView.context,LinearLayoutManager.VERTICAL)
+        recyclerView.addItemDecoration(divider)
         recyclerView.adapter = foodListAdapter
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.RESUMED) {

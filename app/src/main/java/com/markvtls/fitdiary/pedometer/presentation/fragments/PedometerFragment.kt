@@ -63,7 +63,7 @@ class PedometerFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.RESUMED) {
                 viewModel.currentWeekSteps.collect {
-                    adapter.submitList(it)
+                    adapter.submitList(it.reversed())
                 }
             }
         }

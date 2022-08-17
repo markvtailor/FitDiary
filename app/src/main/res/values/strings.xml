@@ -1,8 +1,32 @@
 <resources>
     <string name="app_name">FitDiary</string>
-    <string name="to_food_list">Food List</string>
-    <string name="to_activity_screen">Activity</string>
-    <string name="to_user_profile">Profile</string>
+    <string name="to_food_list">Питание</string>
+    <string name="to_activity_screen">Активность</string>
+    <string name="to_user_profile">Профиль</string>
     <string name="Ccal">Ккал: %s</string>
     <string name="calendar">Calendar</string>
+    <string name="add_to_list_gramm">Грамм…</string>
+    <string name="add_to_list_save">Сохранить</string>
+    <string name="add_to_list_name">Название…</string>
+    <string name="details_gramm">Порция(грамм)</string>
+    <string name="details_ccal">Ккалорий:</string>
+    <string name="details_carbon">Углеводы:</string>
+    <string name="details_edit">Редактировать</string>
+    <string name="details_delete">Удалить</string>
+    <string name="details_fats">Жиры:</string>
+    <string name="details_proteins">Белки:</string>
+    <string name="food_list_label">Название</string>
+    <string name="preferences_steps">Шаги</string>
+    <string name="preferences_ccal">Калории</string>
+    <string name="settings_pedometer_state">Включить шагомер</string>
+    <string name="settings_save">Сохранить</string>
+    <string name="preferences_save">Сохранить</string>
+    <string name="overview_date">Дата: %s</string>
+    <string name="overview_steps">Шагов: %s</string>
+    <string name="overview_ccal_consumed">Калорий получено: %s</string>
+    <string name="overview_ccal_burn">Калорий сожжено: %s</string>
+    <string name="profile_settings">Настройки</string>
+    <string name="profile_preferences">Цели</string>
+    <string name="profile_overview">Отчёт за неделю</string>
+
 </resources>

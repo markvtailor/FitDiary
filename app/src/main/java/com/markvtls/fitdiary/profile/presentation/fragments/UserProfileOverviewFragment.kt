@@ -47,7 +47,7 @@ class UserProfileOverviewFragment : Fragment() {
     private fun loadList() {
         val recyclerView = binding.foodList
         recyclerView.layoutManager = LinearLayoutManager(this.context)
-        val overviewListAdapter = UserProfileOverviewAdapter()
+        val overviewListAdapter = UserProfileOverviewAdapter(requireContext())
         recyclerView.adapter = overviewListAdapter
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.RESUMED) {

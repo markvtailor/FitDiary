@@ -16,8 +16,8 @@
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/app_default_bar"
             app:title="Подробности"
-            android:theme="?attr/actionBarTheme"
-            android:background="@color/design_default_color_primary"
+            android:theme="@style/Theme.FitDiary"
+            android:background="@color/primaryColor"
             android:minHeight="?attr/actionBarSize"
             style="@style/Widget.Material3.ActionBar.Solid"
             android:layout_width="match_parent"
@@ -27,6 +27,7 @@
 
         <TextView
             android:id="@+id/food_name"
+            android:textColor="@color/black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="32sp"
@@ -34,19 +35,37 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/app_default_bar" />
 
+        <View
+            app:layout_constraintTop_toBottomOf="@id/food_name"
+            app:layout_constraintBottom_toTopOf="@id/food_details_serving_label"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"
+            android:background="@color/black"/>
         <TextView
             android:id="@+id/food_details_serving_label"
             android:paddingStart="6dp"
+            android:textColor="@color/black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/food_name"
-            android:text="Serving(gramm):"
+            android:text="@string/details_gramm"
             android:textSize="28sp" />
 
+        <View
+            app:layout_constraintTop_toBottomOf="@id/food_details_serving_label"
+            app:layout_constraintBottom_toTopOf="@id/food_details_ccal_label"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"
+            android:background="@color/black"/>
         <TextView
             android:id="@+id/food_details_serving"
             android:paddingEnd="16dp"
+            android:textColor="@color/black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
@@ -56,73 +75,105 @@
         <TextView
             android:id="@+id/food_details_ccal_label"
             android:paddingStart="6dp"
+            android:textColor="@color/black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/food_details_serving_label"
-            android:text="Ccal:"
+            android:text="@string/details_ccal"
             android:textSize="28sp" />
 
         <TextView
             android:id="@+id/food_details_ccal"
             android:paddingEnd="16dp"
+            android:textColor="@color/black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/food_details_serving"
             android:textSize="28sp" />
 
+        <View
+            app:layout_constraintTop_toBottomOf="@id/food_details_ccal_label"
+            app:layout_constraintBottom_toTopOf="@id/food_details_protein_label"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"
+            android:background="@color/black"/>
         <TextView
             android:id="@+id/food_details_protein_label"
             android:paddingStart="6dp"
+            android:textColor="@color/black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/food_details_ccal_label"
-            android:text="Protein:"
+            android:text="@string/details_proteins"
             android:textSize="28sp" />
 
         <TextView
             android:id="@+id/food_details_protein"
             android:paddingEnd="16dp"
+            android:textColor="@color/black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/food_details_ccal"
             android:textSize="28sp" />
 
+        <View
+            app:layout_constraintTop_toBottomOf="@id/food_details_protein_label"
+            app:layout_constraintBottom_toTopOf="@id/food_details_carbon_label"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"
+            android:background="@color/black"/>
         <TextView
             android:id="@+id/food_details_carbon_label"
             android:paddingStart="6dp"
+            android:textColor="@color/black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/food_details_protein_label"
-            android:text="Carbohydrates:"
+            android:text="@string/details_carbon"
             android:textSize="28sp" />
 
         <TextView
             android:id="@+id/food_details_carbon"
             android:paddingEnd="16dp"
+            android:textColor="@color/black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/food_details_protein"
             android:textSize="28sp" />
 
+        <View
+            app:layout_constraintTop_toBottomOf="@id/food_details_carbon_label"
+            app:layout_constraintBottom_toTopOf="@id/food_details_fat_label"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"
+            android:background="@color/black"/>
         <TextView
             android:id="@+id/food_details_fat_label"
             android:paddingStart="6dp"
+            android:textColor="@color/black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/food_details_carbon_label"
-            android:text="Fats:"
+            android:text="@string/details_fats"
             android:textSize="28sp" />
 
         <TextView
             android:id="@+id/food_details_fat"
             android:paddingEnd="16dp"
+            android:textColor="@color/black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
@@ -131,7 +182,7 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/food_edit_button"
-            android:text="EDIT"
+            android:text="@string/details_edit"
             android:layout_width="205dp"
             android:layout_height="wrap_content"
 
@@ -142,7 +193,7 @@
             android:id="@+id/food_delete_button"
             android:layout_width="205dp"
             android:layout_height="wrap_content"
-            android:text="DELETE"
+            android:text="@string/details_delete"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toEndOf="@+id/food_edit_button"

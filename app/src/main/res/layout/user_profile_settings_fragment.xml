@@ -14,8 +14,8 @@
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/app_default_bar"
             app:title="Настройки"
-            android:theme="?attr/actionBarTheme"
-            android:background="@color/design_default_color_primary"
+            android:theme="@style/Theme.FitDiary"
+            android:background="@color/primaryColor"
             android:minHeight="?attr/actionBarSize"
             style="@style/Widget.Material3.ActionBar.Solid"
             android:layout_width="match_parent"
@@ -25,27 +25,35 @@
 
         <TextView
             android:id="@+id/pedometerSetting"
-            android:text="Включить шагомер"
+            android:textColor="@color/black"
+            android:text="@string/settings_pedometer_state"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="32sp"
             app:layout_constraintTop_toBottomOf="@id/app_default_bar"
             app:layout_constraintStart_toStartOf="parent" />
 
-        <ToggleButton
+        <com.google.android.material.switchmaterial.SwitchMaterial
             android:id="@+id/pedometerToggle"
-            android:layout_width="80dp"
+            android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_marginTop="4dp"
             app:layout_constraintStart_toEndOf="@id/pedometerSetting"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/app_default_bar" />
 
+        <View
+            app:layout_constraintTop_toBottomOf="@id/pedometerSetting"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"
+            android:background="@color/black"/>
         <Button
-            android:text="Сохранить"
+            android:text="@string/settings_save"
             android:id="@+id/save"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="64dp"
             app:layout_constraintBottom_toBottomOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

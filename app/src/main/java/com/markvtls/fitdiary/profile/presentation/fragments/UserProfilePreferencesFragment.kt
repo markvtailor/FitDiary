@@ -40,11 +40,11 @@ class UserProfilePreferencesFragment : Fragment() {
             binding.stepsText.setText(value.stepsGoal.toString(), TextView.BufferType.EDITABLE)
         }
 
-        binding.stepsText.setOnFocusChangeListener { view, hasFocus ->
+        binding.stepsText.setOnFocusChangeListener { _, hasFocus ->
             if (!hasFocus)
                 savePreferences()
         }
-        binding.caloriesText.setOnFocusChangeListener { view, hasFocus ->
+        binding.caloriesText.setOnFocusChangeListener { _, hasFocus ->
             if (!hasFocus)
                 savePreferences()
         }

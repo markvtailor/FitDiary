@@ -15,8 +15,8 @@
             android:id="@+id/food_list_toolbar"
             app:title="Дневник"
             app:menu="@menu/calendar_menu"
-            android:theme="?attr/actionBarTheme"
-            android:background="@color/design_default_color_primary"
+            android:theme="@style/Theme.FitDiary"
+            android:background="@color/primaryColor"
             android:minHeight="?attr/actionBarSize"
             style="@style/Widget.Material3.ActionBar.Solid"
             android:layout_width="match_parent"
@@ -26,7 +26,8 @@
 
         <TextView
             android:id="@+id/food_name_label"
-            android:text="Название"
+            android:text="@string/food_list_label"
+            android:textColor="@color/black"
             android:textSize="36sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -37,7 +38,7 @@
             android:id="@+id/food_ccal_label"
             android:text="@string/Ccal"
             android:textSize="36sp"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="18dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toEndOf="@id/food_name_label"
@@ -45,6 +46,7 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/food_list"
+            android:textColor="@color/black"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:scrollbars="none"
@@ -54,8 +56,11 @@
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/add_food_button"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+            android:src="@drawable/ic_add"
+            android:textAlignment="center"
+            android:textSize="36sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginEnd="32dp"
