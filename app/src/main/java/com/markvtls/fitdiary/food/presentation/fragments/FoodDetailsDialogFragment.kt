@@ -34,10 +34,6 @@ class FoodDetailsDialogFragment : DialogFragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FoodDetailsFragmentBinding.inflate(inflater, container, false)
-            .apply {
-                this.lifecycleOwner = this@FoodDetailsDialogFragment
-                this.viewModel = viewModel
-            }
 
         return binding.root
     }
